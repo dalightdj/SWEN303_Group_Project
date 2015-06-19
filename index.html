@@ -7,7 +7,31 @@
 
 
 	<body>
+		<script>
 
+		var width = 640,
+			height = 880;
+
+		//create container
+		var canvas = d3.select("body")
+						.append("svg")
+						.attr("width", width)
+						.attr("height", height);
+
+		//add header
+		var header = canvas.append("g");
+
+		header.append("text")
+				.attr("x", width/2)
+				.attr("y", 50)
+				.attr("text-anchor", "middle")
+				.attr("fill", "blue")
+				.attr("stroke", "black")
+				.attr("font-family", "sans-serif")
+				.style("font-size", "50px")
+				.text("ANZ Championship");
+
+		</script>
 	</body>
 
 </html>
