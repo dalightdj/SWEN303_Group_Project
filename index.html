@@ -10,7 +10,7 @@
 		<script>
 
 		//'fields'
-		var width = 640,
+		var width = 800,
 			height = 880;
 
 
@@ -40,13 +40,13 @@
 		//add logo
 		header.append("svg:image")
 				.attr("xlink:href", "Images/ANZChampionshipLogo.png")
-				.attr("x", 5)
+				.attr("x", (width/2)-315)
 				.attr("y", 5)
 				.attr("width", 85)
 				.attr("height", 85);
 
 		header.append("text")
-				.attr("x", (width/2)+110)
+				.attr("x", (width/2)+105)
 				.attr("y", 60)
 				.attr("text-anchor", "middle")
 				.attr("fill", "white")
@@ -58,7 +58,7 @@
 
 		header.append("svg:image")
 				.attr("xlink:href", "Images/ANZWhiteLogo.png")
-				.attr("x", 110)
+				.attr("x", (width/2)-215)
 				.attr("y", 0)
 				.attr("width", 160)
 				.attr("height", 75);
@@ -68,21 +68,59 @@
 		//*******************************************
 		//*************COMPARISONS BOX***************
 		//*******************************************
-		var comparisonBoxWidth = width-90,
-			comparisonBoxHeight = 500;
+		var comparisonsBoxWidth = width-90,
+			comparisonsBoxHeight = 500
+			comparisonsBoxX = (width/2)-(comparisonsBoxWidth/2)
+			comparisonsBoxY = 80;
 
 		var comparisonsBox = canvas.append("g");
 
+		//draw main box
 		comparisonsBox.append("rect")
 		    .attr("rx", 20)
     		.attr("ry", 20)
-    		.attr("x", (width/2)-(comparisonBoxWidth/2))
-    		.attr("y", 80)
-    		.attr("width", comparisonBoxWidth)
-    		.attr("height", comparisonBoxHeight)
+    		.attr("x", comparisonsBoxX)
+    		.attr("y", comparisonsBoxY)
+    		.attr("width", comparisonsBoxWidth)
+    		.attr("height", comparisonsBoxHeight)
     		.attr("transform", function(d, i) { return "scale(" + (1 - d / 25) * 20 + ")"; })
     		.style("fill", "#214282");
     		//.style("fill", d3.scale.category20c());
+
+
+
+    	//draw logos
+    	var logoWidth = (comparisonsBoxWidth/3),
+    		logoHeight = 120,
+    		logoY = comparisonsBoxY+30,
+    		logoPadding = 30;
+
+    		comparisonsBox.append("rect")
+    			.attr("x", comparisonsBoxX+logoPadding)
+    			.attr("y", logoY)
+    			.attr("width", logoWidth)
+    			.attr("height", logoHeight);
+
+			comparisonsBox.append("rect")
+    			.attr("x", (comparisonsBoxX+comparisonsBoxWidth)-logoPadding-logoWidth)
+    			.attr("y", logoY)
+    			.attr("width", logoWidth)
+    			.attr("height", logoHeight);
+
+    		comparisonsBox.append("text")
+    					.attr("x", comparisonsBoxX+(comparisonsBoxWidth/2))
+						.attr("y", comparisonsBoxY+100)
+						.attr("text-anchor", "middle")
+						.attr("fill", "white")
+						.attr("font-family", "sans-serif")
+						.style("font-size", "40px")
+						.style("font-weight", "600")
+						.text("vs");
+
+
+
+    	//*******************************************
+    	//*******************************************
 
 		</script>
 	</body>
