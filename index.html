@@ -21,7 +21,7 @@
 						.attr("width", width)
 						.attr("height", height);
 		
-
+		//add background
 		canvas.append("rect")
 		    .attr("rx", 20)
     		.attr("ry", 20)
@@ -33,9 +33,11 @@
     		.style("fill", "#00B8E6");
 
 
+
 		//add header
 		var header = canvas.append("g");
 
+		//add logo
 		header.append("svg:image")
 				.attr("xlink:href", "Images/ANZChampionshipLogo.png")
 				.attr("x", 5)
@@ -44,22 +46,30 @@
 				.attr("height", 85);
 
 		header.append("text")
-				.attr("x", width/2)
+				.attr("x", (width/2)+110)
 				.attr("y", 60)
 				.attr("text-anchor", "middle")
 				.attr("fill", "white")
-				.attr("stroke", "black")
+				//.attr("stroke", "black")
 				.attr("font-family", "sans-serif")
-				.style("font-size", "50px")
-				.text("ANZ Championship");
+				.style("font-size", "45px")
+				.style("font-weight", "600")
+				.text("Championship");
+
+		header.append("svg:image")
+				.attr("xlink:href", "Images/ANZWhiteLogo.png")
+				.attr("x", 110)
+				.attr("y", 0)
+				.attr("width", 160)
+				.attr("height", 75);
 
 
 
 		//*******************************************
 		//*************COMPARISONS BOX***************
 		//*******************************************
-		var comparisonBoxWidth = 500,
-			comparisonBoxHeight = 350;
+		var comparisonBoxWidth = width-90,
+			comparisonBoxHeight = 500;
 
 		var comparisonsBox = canvas.append("g");
 
