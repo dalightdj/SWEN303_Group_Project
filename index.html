@@ -9,9 +9,16 @@
 	<body>
 		<script>
 
-		//'fields'
 		var width = 800,
 			height = 880;
+
+		//filters
+		var season = [2013, 2012, 2011, 2010, 2009, 2008],
+			country = ["NZ/Aus", "NZ", "Aus"],
+			seasonType = ["Regular/Finals", "Regular", "Finals"],
+			teams = ["AdelaideThunderbirds", "CanterburyTactix", "CentralPulse", "MelbourneVixens", "NorthernMystics", "NSWSwifts", "QueenslandFirebirds", "SouthernSteel", "WaikatoBayOfPlentyMagic", "WestCoastFever"],
+			compareTeam1 = teams[6],
+			compareTeam2 = teams[7];
 
 
 
@@ -96,13 +103,15 @@
     		logoY = comparisonsBoxY+logoPadding;
     		
 
-    		comparisonsBox.append("rect")
+    		comparisonsBox.append("svg:image")
+    			.attr("xlink:href", "Images/Logos/" + compareTeam1 + ".jpg")
     			.attr("x", comparisonsBoxX+logoPadding)
     			.attr("y", logoY)
     			.attr("width", logoWidth)
     			.attr("height", logoHeight);
 
-			comparisonsBox.append("rect")
+			comparisonsBox.append("svg:image")
+    			.attr("xlink:href", "Images/Logos/" + compareTeam2 + ".jpg")
     			.attr("x", (comparisonsBoxX+comparisonsBoxWidth)-logoPadding-logoWidth)
     			.attr("y", logoY)
     			.attr("width", logoWidth)
@@ -135,7 +144,7 @@
 						.attr("fill", "white")
 						.attr("font-family", "sans-serif")
 						.style("font-size", "30px")
-						.style("font-weight", "400")
+						.style("font-weight", "500")
 						.text(comparisonsTextData[i]);
 
 			comparisonsTextY += 55;
