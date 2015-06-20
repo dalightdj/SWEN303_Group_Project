@@ -91,9 +91,10 @@
 
     	//draw logos
     	var logoWidth = (comparisonsBoxWidth/3),
-    		logoHeight = 120,
-    		logoY = comparisonsBoxY+30,
-    		logoPadding = 30;
+    		logoHeight = 160,
+    		logoPadding = 30,
+    		logoY = comparisonsBoxY+logoPadding;
+    		
 
     		comparisonsBox.append("rect")
     			.attr("x", comparisonsBoxX+logoPadding)
@@ -107,16 +108,38 @@
     			.attr("width", logoWidth)
     			.attr("height", logoHeight);
 
-    		comparisonsBox.append("text")
-    					.attr("x", comparisonsBoxX+(comparisonsBoxWidth/2))
-						.attr("y", comparisonsBoxY+100)
+
+    	//draw text
+    	var comparisonsTextX = comparisonsBoxX+(comparisonsBoxWidth/2),
+    		comparisonsTextY = logoY+(logoHeight/2)+5;
+
+    	comparisonsBox.append("text")
+    				.attr("x", comparisonsTextX)
+					.attr("y", comparisonsTextY)
+					.attr("text-anchor", "middle")
+					.attr("fill", "white")
+					.attr("font-family", "sans-serif")
+					.style("font-size", "40px")
+					.style("font-weight", "600")
+					.text("vs");
+
+
+		var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Avg. Score"];
+		comparisonsTextY += 130;
+
+		for(var i=0; i<comparisonsTextData.length; i++){
+			comparisonsBox.append("text")
+	    				.attr("x", comparisonsTextX)
+						.attr("y", comparisonsTextY)
 						.attr("text-anchor", "middle")
 						.attr("fill", "white")
 						.attr("font-family", "sans-serif")
-						.style("font-size", "40px")
-						.style("font-weight", "600")
-						.text("vs");
+						.style("font-size", "30px")
+						.style("font-weight", "400")
+						.text(comparisonsTextData[i]);
 
+			comparisonsTextY += 55;
+		}
 
 
     	//*******************************************
