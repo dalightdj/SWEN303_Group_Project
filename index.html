@@ -9,27 +9,70 @@
 	<body>
 		<script>
 
+		//'fields'
 		var width = 640,
 			height = 880;
+
+
 
 		//create container
 		var canvas = d3.select("body")
 						.append("svg")
 						.attr("width", width)
 						.attr("height", height);
+		
+
+		canvas.append("rect")
+		    .attr("rx", 20)
+    		.attr("ry", 20)
+    		// .attr("x", (width/2)-(comparisonBoxWidth/2))
+    		// .attr("y", 80)
+    		.attr("width", width)
+    		.attr("height", height)
+    		.attr("transform", function(d, i) { return "scale(" + (1 - d / 25) * 20 + ")"; })
+    		.style("fill", "#00B8E6");
+
 
 		//add header
 		var header = canvas.append("g");
 
+		header.append("svg:image")
+				.attr("xlink:href", "Images/ANZChampionshipLogo.png")
+				.attr("x", 5)
+				.attr("y", 5)
+				.attr("width", 85)
+				.attr("height", 85);
+
 		header.append("text")
 				.attr("x", width/2)
-				.attr("y", 50)
+				.attr("y", 60)
 				.attr("text-anchor", "middle")
-				.attr("fill", "blue")
+				.attr("fill", "white")
 				.attr("stroke", "black")
 				.attr("font-family", "sans-serif")
 				.style("font-size", "50px")
 				.text("ANZ Championship");
+
+
+
+		//*******************************************
+		//*************COMPARISONS BOX***************
+		//*******************************************
+		var comparisonBoxWidth = 500,
+			comparisonBoxHeight = 350;
+
+		var comparisonsBox = canvas.append("g");
+
+		comparisonsBox.append("rect")
+		    .attr("rx", 20)
+    		.attr("ry", 20)
+    		.attr("x", (width/2)-(comparisonBoxWidth/2))
+    		.attr("y", 80)
+    		.attr("width", comparisonBoxWidth)
+    		.attr("height", comparisonBoxHeight)
+    		.attr("transform", function(d, i) { return "scale(" + (1 - d / 25) * 20 + ")"; })
+    		.style("fill", "#214282");
+    		//.style("fill", d3.scale.category20c());
 
 		</script>
 	</body>
