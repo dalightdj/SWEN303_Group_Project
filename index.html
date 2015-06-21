@@ -4,13 +4,36 @@
 <head>
     <title>ANZ Championship</title>
     <script type="text/javascript" src="d3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </head>
 
 
 <body>
-    //The script which contians the filter box code
-    <script type="text/javascript" src="filterBox.js"></script>
 
+    <!-- Create filter box-->
+    <form onclick="reloadData()">
+        <input type="radio" name="year" id="2008Button" value="2008" checked/>2008
+        <input type="radio" name="year" id="2009Button" value="2009" />2009
+        <input type="radio" name="year" id="2010Button" value="2010" />2010
+        <input type="radio" name="year" id="2011Button" value="2011" />2011
+        <input type="radio" name="year" id="2012Button" value="2012" />2012
+        <input type="radio" name="year" id="2013Button" value="2013" />2013
+        <br/>
+        <br/>
+        <input type="radio" name="country" id="bothCountriesButton" value="both" checked/>Both
+        <input type="radio" name="country" id="ausButton" value="aus" />Aus
+        <input type="radio" name="country" id="nzButton" value="nz" />Nz
+        <br/>
+        <br/>
+        <input type="radio" name="season" id="bothSeasonButton" value="bothSeasons" checked/>Both
+        <input type="radio" name="season" id="regularButton" value="regular" />Regular
+        <input type="radio" name="season" id="finalsButton" value="finals" />Finals
+    </form>
+
+    <input type="button" id="compareButton" onclick="" value="Compare" />
+
+    <!-- The script which contians the filter box code -->
+    <script type="text/javascript" src="filterBox.js"></script>
     <script>
         var width = 800,
             height = 880;
