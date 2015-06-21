@@ -1,167 +1,174 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>ANZ Championship</title>
-		<script type="text/javascript" src="d3.min.js"></script>
-	</head>
+
+<head>
+    <title>ANZ Championship</title>
+    <script type="text/javascript" src="d3.min.js"></script>
+</head>
 
 
-	<body>
-		<script>
+<body>
+    //The script which contians the filter box code
+    <script type="text/javascript" src="filterBox.js"></script>
 
-		var width = 800,
-			height = 880;
+    <script>
+        var width = 800,
+            height = 880;
 
-		//filter choices
-		var yearChoices = [2013, 2012, 2011, 2010, 2009, 2008],
-			countryChoices = ["NZ/Aus", "NZ", "Aus"],
-			seasonTypeChoices = ["Regular/Finals", "Regular", "Finals"],
-			teams = ["AdelaideThunderbirds", "CanterburyTactix", "CentralPulse", "MelbourneVixens", "NorthernMystics", "NSWSwifts", "QueenslandFirebirds", "SouthernSteel", "WaikatoBayOfPlentyMagic", "WestCoastFever"];
+        //filter choices
+        var yearChoices = [2013, 2012, 2011, 2010, 2009, 2008],
+            countryChoices = ["NZ/Aus", "NZ", "Aus"],
+            seasonTypeChoices = ["Regular/Finals", "Regular", "Finals"],
+            teams = ["AdelaideThunderbirds", "CanterburyTactix", "CentralPulse", "MelbourneVixens", "NorthernMystics", "NSWSwifts", "QueenslandFirebirds", "SouthernSteel", "WaikatoBayOfPlentyMagic", "WestCoastFever"];
 
-		//filters
-		var	file = "Tables/" + yearChoices[0] + "-Table1.csv",
-			country = countryChoices[0],
-			seasonType = seasonTypeChoices[0],
-			compareTeam1 = teams[2],
-			compareTeam2 = teams[8];
-
-
-
-
-
-		//create container
-		var canvas = d3.select("body")
-						.append("svg")
-						.attr("width", width)
-						.attr("height", height);
-		
-		//add background
-		canvas.append("rect")
-		    .attr("rx", 20)
-    		.attr("ry", 20)
-    		// .attr("x", (width/2)-(comparisonBoxWidth/2))
-    		// .attr("y", 80)
-    		.attr("width", width)
-    		.attr("height", height)
-    		.attr("transform", function(d, i) { return "scale(" + (1 - d / 25) * 20 + ")"; })
-    		.style("fill", "#00B8E6");
+        //filters
+        var file = "Tables/" + yearChoices[0] + "-Table1.csv",
+            country = countryChoices[0],
+            seasonType = seasonTypeChoices[0],
+            compareTeam1 = teams[2],
+            compareTeam2 = teams[8];
 
 
 
-		//add header
-		var header = canvas.append("g");
 
-		//add logo
-		header.append("svg:image")
-				.attr("xlink:href", "Images/ANZChampionshipLogo.png")
-				.attr("x", (width/2)-290)
-				.attr("y", 5)
-				.attr("width", 85)
-				.attr("height", 85);
 
-		header.append("text")
-				.attr("x", (width/2)+130)
-				.attr("y", 60)
-				.attr("text-anchor", "middle")
-				.attr("fill", "white")
-				//.attr("stroke", "black")
-				.attr("font-family", "sans-serif")
-				.style("font-size", "45px")
-				.style("font-weight", "600")
-				.text("Championship");
+        //create container
+        var canvas = d3.select("body")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height);
 
-		header.append("svg:image")
-				.attr("xlink:href", "Images/ANZWhiteLogo.png")
-				.attr("x", (width/2)-190)
-				.attr("y", 0)
-				.attr("width", 160)
-				.attr("height", 75);
+        //add background
+        canvas.append("rect")
+            .attr("rx", 20)
+            .attr("ry", 20)
+            // .attr("x", (width/2)-(comparisonBoxWidth/2))
+            // .attr("y", 80)
+            .attr("width", width)
+            .attr("height", height)
+            .attr("transform", function (d, i) {
+                return "scale(" + (1 - d / 25) * 20 + ")";
+            })
+            .style("fill", "#00B8E6");
 
 
 
-		//*******************************************
-		//*************COMPARISONS BOX***************
-		//*******************************************
-		var comparisonsBoxWidth = width-90,
-			comparisonsBoxHeight = 500
-			comparisonsBoxX = (width/2)-(comparisonsBoxWidth/2)
-			comparisonsBoxY = 80;
+        //add header
+        var header = canvas.append("g");
 
-		var comparisonsBox = canvas.append("g");
+        //add logo
+        header.append("svg:image")
+            .attr("xlink:href", "Images/ANZChampionshipLogo.png")
+            .attr("x", (width / 2) - 290)
+            .attr("y", 5)
+            .attr("width", 85)
+            .attr("height", 85);
 
-		//draw main box
-		comparisonsBox.append("rect")
-		    .attr("rx", 20)
-    		.attr("ry", 20)
-    		.attr("x", comparisonsBoxX)
-    		.attr("y", comparisonsBoxY)
-    		.attr("width", comparisonsBoxWidth)
-    		.attr("height", comparisonsBoxHeight)
-    		.attr("transform", function(d, i) { return "scale(" + (1 - d / 25) * 20 + ")"; })
-    		.style("fill", "#214282");
-    		//.style("fill", d3.scale.category20c());
+        header.append("text")
+            .attr("x", (width / 2) + 130)
+            .attr("y", 60)
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            //.attr("stroke", "black")
+            .attr("font-family", "sans-serif")
+            .style("font-size", "45px")
+            .style("font-weight", "600")
+            .text("Championship");
 
-
-
-    	//draw logos
-    	var logoWidth = (comparisonsBoxWidth/3),
-    		logoHeight = 160,
-    		logoPadding = 30,
-    		logoY = comparisonsBoxY+logoPadding;
-    		
-
-    		comparisonsBox.append("svg:image")
-    			.attr("xlink:href", "Images/Logos/" + compareTeam1 + ".jpg")
-    			.attr("x", comparisonsBoxX+logoPadding)
-    			.attr("y", logoY)
-    			.attr("width", logoWidth)
-    			.attr("height", logoHeight);
-
-			comparisonsBox.append("svg:image")
-    			.attr("xlink:href", "Images/Logos/" + compareTeam2 + ".jpg")
-    			.attr("x", (comparisonsBoxX+comparisonsBoxWidth)-logoPadding-logoWidth)
-    			.attr("y", logoY)
-    			.attr("width", logoWidth)
-    			.attr("height", logoHeight);
+        header.append("svg:image")
+            .attr("xlink:href", "Images/ANZWhiteLogo.png")
+            .attr("x", (width / 2) - 190)
+            .attr("y", 0)
+            .attr("width", 160)
+            .attr("height", 75);
 
 
-    	//draw text
-    	var comparisonsTextX = comparisonsBoxX+(comparisonsBoxWidth/2),
-    		comparisonsTextY = logoY+(logoHeight/2)+5;
 
-    	comparisonsBox.append("text")
-    				.attr("x", comparisonsTextX)
-					.attr("y", comparisonsTextY)
-					.attr("text-anchor", "middle")
-					.attr("fill", "white")
-					.attr("font-family", "sans-serif")
-					.style("font-size", "40px")
-					.style("font-weight", "600")
-					.text("vs");
+        //*******************************************
+        //*************COMPARISONS BOX***************
+        //*******************************************
+        var comparisonsBoxWidth = width - 90,
+            comparisonsBoxHeight = 500
+        comparisonsBoxX = (width / 2) - (comparisonsBoxWidth / 2)
+        comparisonsBoxY = 80;
 
+        var comparisonsBox = canvas.append("g");
 
-		var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Avg. Score"];
-		comparisonsTextY += 130;
-
-		for(var i=0; i<comparisonsTextData.length; i++){
-			comparisonsBox.append("text")
-	    				.attr("x", comparisonsTextX)
-						.attr("y", comparisonsTextY)
-						.attr("text-anchor", "middle")
-						.attr("fill", "white")
-						.attr("font-family", "sans-serif")
-						.style("font-size", "30px")
-						.style("font-weight", "500")
-						.text(comparisonsTextData[i]);
-
-			comparisonsTextY += 55;
-		}
+        //draw main box
+        comparisonsBox.append("rect")
+            .attr("rx", 20)
+            .attr("ry", 20)
+            .attr("x", comparisonsBoxX)
+            .attr("y", comparisonsBoxY)
+            .attr("width", comparisonsBoxWidth)
+            .attr("height", comparisonsBoxHeight)
+            .attr("transform", function (d, i) {
+                return "scale(" + (1 - d / 25) * 20 + ")";
+            })
+            .style("fill", "#214282");
+        //.style("fill", d3.scale.category20c());
 
 
-    	//*******************************************
-    	//*******************************************
 
-		</script>
-	</body>
+        //draw logos
+        var logoWidth = (comparisonsBoxWidth / 3),
+            logoHeight = 160,
+            logoPadding = 30,
+            logoY = comparisonsBoxY + logoPadding;
+
+
+        comparisonsBox.append("svg:image")
+            .attr("xlink:href", "Images/Logos/" + compareTeam1 + ".jpg")
+            .attr("x", comparisonsBoxX + logoPadding)
+            .attr("y", logoY)
+            .attr("width", logoWidth)
+            .attr("height", logoHeight);
+
+        comparisonsBox.append("svg:image")
+            .attr("xlink:href", "Images/Logos/" + compareTeam2 + ".jpg")
+            .attr("x", (comparisonsBoxX + comparisonsBoxWidth) - logoPadding - logoWidth)
+            .attr("y", logoY)
+            .attr("width", logoWidth)
+            .attr("height", logoHeight);
+
+
+        //draw text
+        var comparisonsTextX = comparisonsBoxX + (comparisonsBoxWidth / 2),
+            comparisonsTextY = logoY + (logoHeight / 2) + 5;
+
+        comparisonsBox.append("text")
+            .attr("x", comparisonsTextX)
+            .attr("y", comparisonsTextY)
+            .attr("text-anchor", "middle")
+            .attr("fill", "white")
+            .attr("font-family", "sans-serif")
+            .style("font-size", "40px")
+            .style("font-weight", "600")
+            .text("vs");
+
+
+        var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Avg. Score"];
+        comparisonsTextY += 130;
+
+        for (var i = 0; i < comparisonsTextData.length; i++) {
+            comparisonsBox.append("text")
+                .attr("x", comparisonsTextX)
+                .attr("y", comparisonsTextY)
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .attr("font-family", "sans-serif")
+                .style("font-size", "30px")
+                .style("font-weight", "500")
+                .text(comparisonsTextData[i]);
+
+            comparisonsTextY += 55;
+        }
+
+
+        //*******************************************
+        //*******************************************
+    </script>
+
+</body>
 
 </html>
