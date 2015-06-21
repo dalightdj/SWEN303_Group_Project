@@ -1,110 +1,60 @@
-//Add year filter buttons
-var years = d3.select("body").append("p");
+//reload the csv data based on the filter options 
+function reloadData() {
 
-years.append("text")
-    .attr("stroke", "black")
-    .attr("font-family", "sans-serif")
-    .text("Year:  ");
+    //Get the value of the each checked button 
+    var checkedYearValue = $('input[name="year"]:checked').val();
+    var checkedCountryValue = $('input[name="country"]:checked').val();
+    var checkedSeasonValue = $('input[name="season"]:checked').val();
 
-years.append("input")
-    .attr("type", "button")
-    .attr("id", "2008Button")
-    .attr("value", "2008")
-    .style("font-size", "10px");
+    //Just a map to get the names of the data files
+    var yearToFilename = {
+        2008: "Tables/2008-Table1.csv",
+        2009: "Tables/2009-Table1.csv",
+        2010: "Tables/2010-Table1.csv",
+        2011: "Tables/2011-Table1.csv",
+        2012: "Tables/2012-Table1.csv",
+        2013: "Tables/2013-Table1.csv"
+    };
 
-years.append("input")
-    .attr("type", "button")
-    .attr("id", "2009Button")
-    .attr("value", "2009")
-    .style("font-size", "10px");
+    //A list showing which team belong to which country
+    var teamToCountry = {
 
-years.append("input")
-    .attr("type", "button")
-    .attr("id", "2010Button")
-    .attr("value", "2010")
-    .style("font-size", "10px");
+        nz: ["Central Pulse", "Northern Mystics", "Waikato Bay of Plenty Magic", "Southern Steel", "Canterbury Tactix"],
+        aus: ["New South Wales Swifts", "Adelaide Thunderbirds", "Melbourne Vixens", "West Coast Fever", "Queensland Firebirds"],
+        both: ["Central Pulse", "Northern Mystics", "Waikato Bay of Plenty Magic", "Southern Steel", "Canterbury Tactix", "New South Wales Swifts", "Adelaide Thunderbirds", "Melbourne Vixens", "West Coast Fever", "Queensland Firebirds"]
 
-years.append("input")
-    .attr("type", "button")
-    .attr("id", "2011Button")
-    .attr("value", "2011")
-    .style("font-size", "10px");
+    };
 
-years.append("input")
-    .attr("type", "button")
-    .attr("id", "2012Button")
-    .attr("value", "2012")
-    .style("font-size", "10px");
 
-years.append("input")
-    .attr("type", "button")
-    .attr("id", "2013Button")
-    .attr("value", "2013")
-    .style("font-size", "10px");
+    var teamData = {};
 
-//Add Country filter buttons
-var countries = d3.select("body").append("p");
+    //Get the filename given the year
+    var fileName = yearToFilename[checkedYearValue];
 
-countries.append("text")
-    .attr("stroke", "black")
-    .attr("font-family", "sans-serif")
-    .text("Country:  ");
+    d3.csv(fileName, function (data) {
 
-countries.append("input")
-    .attr("type", "button")
-    .attr("id", "bothCountryButton")
-    .attr("value", "Both")
-    .style("font-size", "10px");
 
-countries.append("input")
-    .attr("type", "button")
-    .attr("id", "nzButton")
-    .attr("value", "Nz")
-    .style("font-size", "10px");
+        //Gather all data for each team depending on which country is seleceted
+        teamToCountry[checkedCountryValue].forEach(function (element) {
+            var d = [];
 
-countries.append("input")
-    .attr("type", "button")
-    .attr("id", "ausButton")
-    .attr("value", "Aus")
-    .style("font-size", "10px");
+            data.forEach(function (row) {
 
-//Add Season filter buttons
-var seasons = d3.select("body").append("p");
+                if (row["Home Team"] === element || row["Away Team"] === element) {
 
-seasons.append("text")
-    .attr("stroke", "black")
-    .attr("font-family", "sans-serif")
-    .text("Season:  ");
+                    d.push(row);
 
-seasons.append("input")
-    .attr("type", "button")
-    .attr("id", "bothSeasonButton")
-    .attr("value", "Both")
-    .style("font-size", "10px");
+                }
 
-seasons.append("input")
-    .attr("type", "button")
-    .attr("id", "bothButton")
-    .attr("value", "Both")
-    .style("font-size", "10px");
+            });
 
-seasons.append("input")
-    .attr("type", "button")
-    .attr("id", "regularButton")
-    .attr("value", "Regaular")
-    .style("font-size", "10px");
+            teamData[element] = d;
 
-seasons.append("input")
-    .attr("type", "button")
-    .attr("id", "finalsButton")
-    .attr("value", "Finals")
-    .style("font-size", "10px");
+        });
 
-//Add compare button
-d3.select("body")
-    .append("p")
-    .append("input")
-    .attr("type", "button")
-    .attr("id", "compareButton")
-    .attr("value", "Compare")
-    .style("font-size", "10px");
+        console.log(teamData);
+
+    });
+
+
+}
