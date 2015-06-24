@@ -233,20 +233,35 @@
                         .attr("height", 30)
                         .attr("fill", "#AC1963");
 
-                //stretch bar to correct width
+                //animate bar to stretch to correct width
                 rect.transition().duration(3000)
                         .attr("x", comparisonsTextX-165-currentBarWidth)
                         .attr("y", comparisonsTextY)
                         .attr("width", currentBarWidth)
-                        .attr("height", 30)
-                        .attr("fill", "black");
+                        .attr("height", 30);
+                        //.attr("fill", "black");
 
 
-                comparisonsBox.append("text")
+                //draw percentages
+                var text = comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX-175)
+                    .attr("y", comparisonsTextY+25)
+                    .attr("text-anchor", "end")
+                    .attr("fill", "white")
+                    .attr("fill-opacity", 0)
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "25px")
+                    .style("font-weight", "500")
+                    .text(0 + "%");
+
+
+                //animate percentages to move with bar
+                text.transition().duration(3000)
                     .attr("x", comparisonsTextX-175-currentBarWidth)
                     .attr("y", comparisonsTextY+25)
                     .attr("text-anchor", "end")
                     .attr("fill", "white")
+                    .attr("fill-opacity", 1)
                     .attr("font-family", "sans-serif")
                     .style("font-size", "25px")
                     .style("font-weight", "500")
