@@ -113,7 +113,7 @@
         //*************COMPARISONS BOX***************
         //*******************************************
         var comparisonsBoxWidth = 900,
-            comparisonsBoxHeight = 500
+            comparisonsBoxHeight = 600
         comparisonsBoxX = (width / 2) - (comparisonsBoxWidth / 2)
         comparisonsBoxY = 80;
 
@@ -172,7 +172,7 @@
             .text("vs");
 
 
-        var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Avg. Score"];
+        var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Goals For", "Goals Against", "Avg. Score"];
         comparisonsTextY += 130;
 
         for (var i = 0; i < comparisonsTextData.length; i++) {
@@ -200,7 +200,7 @@
             comparisonsTextData = calcValues(data, compareTeam1);
             //add left side team's values to canvas
             comparisonsTextY = logoY + (logoHeight / 2) + 135;
-            for (var i = 0; i < comparisonsTextData.length; i++) {
+            for (var i = 0; i < 7; i++) {
                 comparisonsBox.append("text")
                     .attr("x", comparisonsTextX - 105)
                     .attr("y", comparisonsTextY)
@@ -214,28 +214,11 @@
                 comparisonsTextY += 55;
             }
 
-            //draw progress boz
-            comparisonsTextY = logoY + (logoHeight / 2) + 135;
-            for(var i = 0; i <comparisonsTextData.length; i++){
-                comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX-165)
-                    .attr("y", comparisonsTextY)
-                    .attr("text-anchor", "end")
-                    .attr("fill", "white")
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "30px")
-                    .style("font-weight", "500")
-                    .text("test " + i);
-
-                 comparisonsTextY += 55;
-            }
-
-
             //get right team's information
             comparisonsTextData = calcValues(data, compareTeam2);
             //add values to canvas
             comparisonsTextY = logoY + (logoHeight / 2) + 135;
-            for (var i = 0; i < comparisonsTextData.length; i++) {
+            for (var i = 0; i < 7; i++) {
                 comparisonsBox.append("text")
                     .attr("x", comparisonsTextX + 105)
                     .attr("y", comparisonsTextY)
@@ -248,6 +231,24 @@
 
                 comparisonsTextY += 55;
             }
+
+
+
+            //draw progress boz
+            comparisonsTextY = logoY + (logoHeight / 2) + 135;
+            for(var i = 7; i <comparisonsTextData.length; i++){
+                comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX-165)
+                    .attr("y", comparisonsTextY)
+                    .attr("text-anchor", "end")
+                    .attr("fill", "white")
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "30px")
+                    .style("font-weight", "500")
+                    .text("test " + i);
+
+                 comparisonsTextY += 55;
+            }
         });
 
 
@@ -256,6 +257,8 @@
                     losses = 0,
                     homeWins = 0,
                     homeLosses = 0,
+                    goalsFor = 0,
+                    goalsAgainst = 0,
                     averageScore = 0,
                     homeGame;
 
@@ -278,6 +281,9 @@
 
                     if (homeGame) {
                         averageScore += homeScore;
+                        goalsFor += homeScore;
+                        goalsAgainst += awayScore;
+
                         if (homeScore > awayScore) {
                             wins++;
                             homeWins++;
@@ -287,6 +293,9 @@
                         }
                     } else {
                         averageScore += awayScore;
+                        goalsFor += awayScore;
+                        goalsAgainst += homeScore;
+
                         if (awayScore > homeScore) {
                             wins++;
                         } else {
@@ -295,7 +304,9 @@
                     }
                 }
 
-                return comparisonsTextData = [wins, losses, homeWins, homeLosses, averageScore];
+                averageScore = averageScore/data[teamName].length;
+
+                return comparisonsTextData = [wins, losses, homeWins, homeLosses, goalsFor, goalsAgainst, averageScore, wins/(wins+losses), losses/(wins+losses), homeWins/(homeWins+homeLosses), homeLosses/(homeWins+homeLosses)];//the first seven indices are the values, the second five are the percentages
             }
             //*******************************************
             //*******************************************
