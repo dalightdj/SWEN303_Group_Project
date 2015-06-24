@@ -252,10 +252,10 @@
                     .attr("font-family", "sans-serif")
                     .style("font-size", "25px")
                     .style("font-weight", "500")
-                    .text(0 + "%");
-
+                    .text(((barWidth/180)*100));
 
                 //animate percentages to move with bar
+                console.log(((barWidth/180)*100));
                 text.transition().duration(3000)
                     .attr("x", comparisonsTextX-175-currentBarWidth)
                     .attr("y", comparisonsTextY+25)
@@ -265,7 +265,13 @@
                     .attr("font-family", "sans-serif")
                     .style("font-size", "25px")
                     .style("font-weight", "500")
-                    .text(Math.round(((barWidth/180)*100)) + "%");
+                    .tween("text", function(){
+                        var interpolater = d3.interpolateRound(0, this.textContent);
+
+                        return function(t){
+                            this.textContent = interpolater(t) + "%";
+                        };
+                    });
 
                  comparisonsTextY += 55;
             }
