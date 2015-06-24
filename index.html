@@ -32,11 +32,13 @@
 
     <input type="button" id="compareButton" onclick="" value="Compare" />
 
+
+
     <!-- The script which contians the filter box code -->
     <script type="text/javascript" src="filterBox.js"></script>
     <script>
-        var width = 800,
-            height = 880;
+        var width = 1500,
+            height = 1500;
 
         //filter choices
         var yearChoices = [2013, 2012, 2011, 2010, 2009, 2008],
@@ -187,11 +189,14 @@
             comparisonsTextY += 55;
         }
 
-
         //*******************************************
         //*******************************************
     </script>
-
+    <!-- This is loaded here because it needs the canvas to be created because it uses it-->
+    <script type="text/javascript" src="infomationBox.js"></script>
+    <script>
+        addInfoboxes();
+    </script>
 </body>
 
 </html>
