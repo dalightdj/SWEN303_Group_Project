@@ -214,6 +214,22 @@
                 comparisonsTextY += 55;
             }
 
+            //draw progress boz
+            comparisonsTextY = logoY + (logoHeight / 2) + 135;
+            for(var i = 0; i <comparisonsTextData.length; i++){
+                comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX-165)
+                    .attr("y", comparisonsTextY)
+                    .attr("text-anchor", "end")
+                    .attr("fill", "white")
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "30px")
+                    .style("font-weight", "500")
+                    .text("test " + i);
+
+                 comparisonsTextY += 55;
+            }
+
 
             //get right team's information
             comparisonsTextData = calcValues(data, compareTeam2);
