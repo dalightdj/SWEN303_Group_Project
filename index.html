@@ -230,6 +230,15 @@
                 //     .text("test " + i);
 
 
+
+
+                ////////////CHANGE BAR WIDTH DEPENDING ON STATS/////////////
+                ////////////////////////////////////////////////////////////
+                barWidth-=30;
+                var currentBarWidth = barWidth;
+                
+
+
                 var rect = comparisonsBox.append("rect")
                         .attr("x", comparisonsTextX-165)
                         .attr("y", comparisonsTextY)
@@ -238,11 +247,11 @@
                         .attr("fill", "#AC1963");
 
                 rect.transition().duration(3000)
-                        .attr("x", comparisonsTextX-165-barWidth)
+                        .attr("x", comparisonsTextX-165-currentBarWidth)
                         .attr("y", comparisonsTextY)
-                        .attr("width", barWidth)
+                        .attr("width", currentBarWidth)
                         .attr("height", 30)
-                        .attr("fill", "#AC1963");
+                        .attr("fill", "black");
 
 
 
