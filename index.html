@@ -189,16 +189,20 @@
 
 
 
-        comparisonsTextData = [100, 100, 100, 100, 100];
-        //left team's information
-        getTeamData.then(function(data){
+        //until i can access the filters
+        compareTeam1 = "Central Pulse";
+        compareTeam2 = "Waikato Bay of Plenty Magic"
 
-            console.log(data["Central Pulse"]);
-            //wins, losses, home wins, home losses, average score
+        //get statistic values
+        getTeamData.then(function(data){
+            
+            //get left team's information
+            comparisonsTextData = calcValues(data, compareTeam1);
+            //add left side team's values to canvas
             comparisonsTextY = logoY + (logoHeight / 2) + 135;
             for(var i = 0; i <comparisonsTextData.length; i++){
                 comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX-100)
+                    .attr("x", comparisonsTextX-105)
                     .attr("y", comparisonsTextY)
                     .attr("text-anchor", "end")
                     .attr("fill", "white")
@@ -209,18 +213,15 @@
 
                  comparisonsTextY += 55;
             }
-        });
 
 
-        //right team's information
-        getTeamData.then(function(data){
-
-            console.log(data["Central Pulse"]);
-            //wins, losses, home wins, home losses, average score
+            //get right team's information
+            comparisonsTextData = calcValues(data, compareTeam2);
+            //add values to canvas
             comparisonsTextY = logoY + (logoHeight / 2) + 135;
             for(var i = 0; i <comparisonsTextData.length; i++){
                 comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX+100)
+                    .attr("x", comparisonsTextX+105)
                     .attr("y", comparisonsTextY)
                     .attr("text-anchor", "start")
                     .attr("fill", "white")
@@ -234,6 +235,57 @@
         });
 
 
+        function calcValues(data, teamName){
+            var wins = 0,
+                losses = 0,
+                homeWins = 0,
+                homeLosses = 0,
+                averageScore = 0,
+                homeGame;
+
+            for(var i = 0; i <data[teamName].length; i++){
+                var roundData = data[teamName][i];
+
+                if(roundData["Home Team"] == teamName){
+                    homeGame = true;
+                }
+                else if(roundData["Away Team"] == teamName){
+                    homeGame = false;
+                }
+                else{
+                    console.log("FAIL READING " + teamName + " round " + i);
+                }
+
+                var homeScore,
+                    awayScore;
+
+                    //GETSCORES//////////////////
+                    /////////////////////////////
+
+                if(homeGame){
+                    averageScore+=homeScore;
+                    if(homeScore>awayScore){
+                        wins++;
+                        homeWins++;
+                    }
+                    else{
+                        losses++;
+                        homeLosses++;
+                    }
+                }
+                else{
+                    averageScore+=awayScore;
+                    if(awayScore>homeScore){
+                        wins++;
+                    }
+                    else{
+                        losses++;
+                    }
+                }
+            }
+
+            return comparisonsTextData = [wins, losses, homeWins, homeLosses, averageScore];
+        }
         //*******************************************
         //*******************************************
     </script>
