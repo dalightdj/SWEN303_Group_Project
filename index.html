@@ -214,6 +214,48 @@
                 comparisonsTextY += 55;
             }
 
+
+            //draw progress bar
+            barWidth = 180;
+            comparisonsTextY = logoY + (logoHeight / 2) + 110;
+            for(var i = 7; i <comparisonsTextData.length; i++){
+                // comparisonsBox.append("text")
+                //     .attr("x", comparisonsTextX-165)
+                //     .attr("y", comparisonsTextY)
+                //     .attr("text-anchor", "end")
+                //     .attr("fill", "white")
+                //     .attr("font-family", "sans-serif")
+                //     .style("font-size", "30px")
+                //     .style("font-weight", "500")
+                //     .text("test " + i);
+
+
+                var rect = comparisonsBox.append("rect")
+                        .attr("x", comparisonsTextX-165)
+                        .attr("y", comparisonsTextY)
+                        .attr("width", 0)
+                        .attr("height", 30)
+                        .attr("fill", "#AC1963");
+
+                rect.transition().duration(3000)
+                        .attr("x", comparisonsTextX-165-barWidth)
+                        .attr("y", comparisonsTextY)
+                        .attr("width", barWidth)
+                        .attr("height", 30)
+                        .attr("fill", "#AC1963");
+
+
+
+                 comparisonsTextY += 55;
+            }
+
+
+
+
+
+
+
+
             //get right team's information
             comparisonsTextData = calcValues(data, compareTeam2);
             //add values to canvas
@@ -234,21 +276,17 @@
 
 
 
-            //draw progress boz
-            comparisonsTextY = logoY + (logoHeight / 2) + 135;
-            for(var i = 7; i <comparisonsTextData.length; i++){
-                comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX-165)
-                    .attr("y", comparisonsTextY)
-                    .attr("text-anchor", "end")
-                    .attr("fill", "white")
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "30px")
-                    .style("font-weight", "500")
-                    .text("test " + i);
+            
 
-                 comparisonsTextY += 55;
-            }
+
+
+            // //animate text
+            // var x = 30;
+            // for(var i = 7; i <comparisonsTextData.length; i++){
+            //     var texts = d3.selectAll("text")
+            //     x+=5;
+            //     texts.transition().duration(5000).style("font-size", x + "px");
+            // }
         });
 
 
