@@ -193,7 +193,7 @@
         compareTeam1 = "Central Pulse";
         compareTeam2 = "Waikato Bay of Plenty Magic"
 
-        //get statistic values
+        //draw statistic values
         getTeamData.then(function (data) {
 
             //get left team's information
@@ -219,26 +219,13 @@
             barWidth = 180;
             comparisonsTextY = logoY + (logoHeight / 2) + 110;
             for(var i = 7; i <comparisonsTextData.length; i++){
-                // comparisonsBox.append("text")
-                //     .attr("x", comparisonsTextX-165)
-                //     .attr("y", comparisonsTextY)
-                //     .attr("text-anchor", "end")
-                //     .attr("fill", "white")
-                //     .attr("font-family", "sans-serif")
-                //     .style("font-size", "30px")
-                //     .style("font-weight", "500")
-                //     .text("test " + i);
-
-
-
-
                 ////////////CHANGE BAR WIDTH DEPENDING ON STATS/////////////
                 ////////////////////////////////////////////////////////////
                 barWidth-=30;
                 var currentBarWidth = barWidth;
                 
 
-
+                //draw bar at origin
                 var rect = comparisonsBox.append("rect")
                         .attr("x", comparisonsTextX-165)
                         .attr("y", comparisonsTextY)
@@ -246,6 +233,7 @@
                         .attr("height", 30)
                         .attr("fill", "#AC1963");
 
+                //stretch bar to correct width
                 rect.transition().duration(3000)
                         .attr("x", comparisonsTextX-165-currentBarWidth)
                         .attr("y", comparisonsTextY)
@@ -254,6 +242,15 @@
                         .attr("fill", "black");
 
 
+                comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX-175-currentBarWidth)
+                    .attr("y", comparisonsTextY+25)
+                    .attr("text-anchor", "end")
+                    .attr("fill", "white")
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "25px")
+                    .style("font-weight", "500")
+                    .text(Math.round(((barWidth/180)*100)) + "%");
 
                  comparisonsTextY += 55;
             }
