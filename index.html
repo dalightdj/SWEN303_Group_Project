@@ -188,6 +188,52 @@
         }
 
 
+
+        comparisonsTextData = [100, 100, 100, 100, 100];
+        //left team's information
+        getTeamData.then(function(data){
+
+            console.log(data["Central Pulse"]);
+            //wins, losses, home wins, home losses, average score
+            comparisonsTextY = logoY + (logoHeight / 2) + 135;
+            for(var i = 0; i <comparisonsTextData.length; i++){
+                comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX-100)
+                    .attr("y", comparisonsTextY)
+                    .attr("text-anchor", "end")
+                    .attr("fill", "white")
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "30px")
+                    .style("font-weight", "500")
+                    .text(comparisonsTextData[i]);
+
+                 comparisonsTextY += 55;
+            }
+        });
+
+
+        //right team's information
+        getTeamData.then(function(data){
+
+            console.log(data["Central Pulse"]);
+            //wins, losses, home wins, home losses, average score
+            comparisonsTextY = logoY + (logoHeight / 2) + 135;
+            for(var i = 0; i <comparisonsTextData.length; i++){
+                comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX+100)
+                    .attr("y", comparisonsTextY)
+                    .attr("text-anchor", "start")
+                    .attr("fill", "white")
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "30px")
+                    .style("font-weight", "500")
+                    .text(comparisonsTextData[i]);
+
+                 comparisonsTextY += 55;
+            }
+        });
+
+
         //*******************************************
         //*******************************************
     </script>
