@@ -218,12 +218,12 @@
             //draw progress bar
             barWidth = 180;
             comparisonsTextY = logoY + (logoHeight / 2) + 110;
-            for(var i = 7; i <comparisonsTextData.length; i++){
-                ////////////CHANGE BAR WIDTH DEPENDING ON STATS/////////////
-                ////////////////////////////////////////////////////////////
-                barWidth-=30;
-                var currentBarWidth = barWidth;
+            for(var i = 7; i < comparisonsTextData.length; i++){
                 
+                var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
+                var currentBarWidth = barWidth*(percentage/100);
+                console.log("current bar width: " + currentBarWidth);
+                console.log("percentage: " + comparisonsTextData[i]);
 
                 //draw bar at origin
                 var rect = comparisonsBox.append("rect")
@@ -252,10 +252,9 @@
                     .attr("font-family", "sans-serif")
                     .style("font-size", "25px")
                     .style("font-weight", "500")
-                    .text(((barWidth/180)*100));
+                    .text(percentage);
 
-                //animate percentages to move with bar
-                console.log(((barWidth/180)*100));
+                //animate percentages to move with ba
                 text.transition().duration(3000)
                     .attr("x", comparisonsTextX-175-currentBarWidth)
                     .attr("y", comparisonsTextY+25)
@@ -302,6 +301,63 @@
             }
 
 
+            comparisonsTextY = logoY + (logoHeight / 2) + 110;
+            for(var i = 7; i < comparisonsTextData.length; i++){
+                
+                var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
+                var currentBarWidth = barWidth*(percentage/100);
+                console.log("current bar width: " + currentBarWidth);
+                console.log("percentage: " + comparisonsTextData[i]);
+
+                //draw bar at origin
+                var rect = comparisonsBox.append("rect")
+                        .attr("x", comparisonsTextX+165)
+                        .attr("y", comparisonsTextY)
+                        .attr("width", 0)
+                        .attr("height", 30)
+                        .attr("fill", "#AC1963");
+
+                //animate bar to stretch to correct width
+                rect.transition().duration(3000)
+                        .attr("x", comparisonsTextX+165)
+                        .attr("y", comparisonsTextY)
+                        .attr("width", currentBarWidth)
+                        .attr("height", 30);
+                        //.attr("fill", "black");
+
+
+                //draw percentages
+                var text = comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX+175)
+                    .attr("y", comparisonsTextY+25)
+                    .attr("text-anchor", "start")
+                    .attr("fill", "white")
+                    .attr("fill-opacity", 0)
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "25px")
+                    .style("font-weight", "500")
+                    .text(percentage);
+
+                //animate percentages to move with ba
+                text.transition().duration(3000)
+                    .attr("x", comparisonsTextX+175+currentBarWidth)
+                    .attr("y", comparisonsTextY+25)
+                    .attr("text-anchor", "start")
+                    .attr("fill", "white")
+                    .attr("fill-opacity", 1)
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "25px")
+                    .style("font-weight", "500")
+                    .tween("text", function(){
+                        var interpolater = d3.interpolateRound(0, this.textContent);
+
+                        return function(t){
+                            this.textContent = interpolater(t) + "%";
+                        };
+                    });
+
+                 comparisonsTextY += 55;
+            }
 
             
 
@@ -338,16 +394,25 @@
                         console.log("FAIL READING " + teamName + " round " + i);
                     }
 
-                    var homeScore,
-                        awayScore;
+                    var homeScore = data[teamName][i]["Home Score"],
+                        awayScore = data[teamName][i]["Away Score"];
 
-                    //GETSCORES//////////////////
-                    /////////////////////////////
+
+                    //PRINT STATEMENTS
+                    // if(homeGame){
+                    //     console.log("Home game");
+                    // }
+                    // else{
+                    //     console.log("Away game");
+                    // }
+                    // console.log("Home score = '" + homeScore + "'");
+                    // console.log("Away score = '" + awayScore + "'");
+
 
                     if (homeGame) {
-                        averageScore += homeScore;
-                        goalsFor += homeScore;
-                        goalsAgainst += awayScore;
+                        averageScore += +homeScore;
+                        goalsFor += +homeScore;
+                        goalsAgainst += +awayScore;
 
                         if (homeScore > awayScore) {
                             wins++;
@@ -357,9 +422,9 @@
                             homeLosses++;
                         }
                     } else {
-                        averageScore += awayScore;
-                        goalsFor += awayScore;
-                        goalsAgainst += homeScore;
+                        averageScore += +awayScore;
+                        goalsFor += +awayScore;
+                        goalsAgainst += +homeScore;
 
                         if (awayScore > homeScore) {
                             wins++;
@@ -369,9 +434,27 @@
                     }
                 }
 
-                averageScore = averageScore/data[teamName].length;
+                // PRINT STATEMENTS
+                console.log("average score: " + averageScore);
+                console.log("total games: " + data[teamName].length);
 
-                return comparisonsTextData = [wins, losses, homeWins, homeLosses, goalsFor, goalsAgainst, averageScore, wins/(wins+losses), losses/(wins+losses), homeWins/(homeWins+homeLosses), homeLosses/(homeWins+homeLosses)];//the first seven indices are the values, the second five are the percentages
+
+                averageScore = Math.round(averageScore/data[teamName].length);
+
+                // PRINT STATEMENTS
+                console.log("wins: " + wins);
+                console.log("losses: " + losses);
+                console.log("home wins: " + homeWins);
+                console.log("home losses: " + homeLosses);
+                console.log("goals for: " + goalsFor);
+                console.log("goals against: " + goalsAgainst);
+                console.log("average score: " + averageScore);
+                console.log("average wins: " + wins/(wins+losses));
+                console.log("average losses: " + losses/(wins+losses));
+                console.log("average home wins: " + homeWins/(homeWins+homeLosses));
+                console.log("average home losses: " + homeLosses/(homeWins+homeLosses));
+                
+                return comparisonsTextData = [wins, losses, homeWins, homeLosses, goalsFor, goalsAgainst, averageScore, wins/(wins+losses), losses/(wins+losses), homeWins/(homeWins+homeLosses), homeLosses/(homeWins+homeLosses)];//the first seven indices are the values, the second 4 are the percentages
             }
             //*******************************************
             //*******************************************
