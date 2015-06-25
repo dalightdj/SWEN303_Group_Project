@@ -1,4 +1,103 @@
-var td = "this is a var";
+var dropDownBox1 = d3.select("body")
+    .append("select")
+    .attr("id", "ddb1")
+    .attr("onChange", "setCompFields()");
+
+var dropDownBox2 = d3.select("body")
+    .append("select")
+    .attr("id", "ddb2")
+    .attr("onChange", "setCompFields()");
+
+
+dropDownBox1.append("option")
+    .attr("value", "AdelaideThunderbirds")
+    .text("AdelaideThunderbirds");
+
+dropDownBox1.append("option")
+    .attr("value", "CanterburyTactix")
+    .text("Canterbury Tactix");
+
+dropDownBox1.append("option")
+    .attr("value", "CentralPulse")
+    .text("Central Pulse");
+
+dropDownBox1.append("option")
+    .attr("value", "MelbourneVixens")
+    .text("Melbourne Vixens");
+
+dropDownBox1.append("option")
+    .attr("value", "NorthernMystics")
+    .text("Northern Mystics");
+
+dropDownBox1.append("option")
+    .attr("value", "NSWSwifts")
+    .text("NSW Swifts");
+
+dropDownBox1.append("option")
+    .attr("value", "QueenslandFirebirds")
+    .text("Queensland Firebirds");
+
+dropDownBox1.append("option")
+    .attr("value", "SouthernSteel")
+    .text("Southern Steel");
+
+dropDownBox1.append("option")
+    .attr("value", "WaikatoBayOfPlentyMagic")
+    .text("Waikato Bay Of Plenty Magic");
+
+dropDownBox1.append("option")
+    .attr("value", "WestCoastFever")
+    .text("West Coast Fever");
+
+dropDownBox2.append("option")
+    .attr("value", "AdelaideThunderbirds")
+    .text("AdelaideThunderbirds");
+
+dropDownBox2.append("option")
+    .attr("value", "CanterburyTactix")
+    .text("Canterbury Tactix");
+
+dropDownBox2.append("option")
+    .attr("value", "CentralPulse")
+    .text("Central Pulse");
+
+dropDownBox2.append("option")
+    .attr("value", "MelbourneVixens")
+    .text("Melbourne Vixens");
+
+dropDownBox2.append("option")
+    .attr("value", "NorthernMystics")
+    .text("Northern Mystics");
+
+dropDownBox2.append("option")
+    .attr("value", "NSWSwifts")
+    .text("NSW Swifts");
+
+dropDownBox2.append("option")
+    .attr("value", "QueenslandFirebirds")
+    .text("Queensland Firebirds");
+
+dropDownBox2.append("option")
+    .attr("value", "SouthernSteel")
+    .text("Southern Steel");
+
+dropDownBox2.append("option")
+    .attr("value", "WaikatoBayOfPlentyMagic")
+    .text("Waikato Bay Of Plenty Magic");
+
+dropDownBox2.append("option")
+    .attr("value", "WestCoastFever")
+    .text("West Coast Fever");
+
+function setCompFields() {
+    var ddb1 = document.getElementById("ddb1");
+    var ddb2 = document.getElementById("ddb2");
+
+    compareTeam1 = ddb1.options[ddb1.selectedIndex].value;
+    compareTeam2 = ddb2.options[ddb2.selectedIndex].value;
+
+}
+
 
 //reload the csv data based on the filter options 
 function reloadData() {
@@ -69,7 +168,7 @@ function reloadData() {
 
         });
 
-        console.log(teamData);
+        // console.log(teamData);
 
     });
 
@@ -142,7 +241,7 @@ var getTeamData = new Promise(function (resolve, reject) {
 
         });
 
-        console.log(teamData);
+        //console.log(teamData);
 
         resolve(teamData);
     });
