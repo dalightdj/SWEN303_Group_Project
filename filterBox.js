@@ -1,5 +1,8 @@
+var td = "this is a var";
+
 //reload the csv data based on the filter options 
 function reloadData() {
+
 
     //Get the value of the each checked button 
     var checkedYearValue = $('input[name="year"]:checked').val();
@@ -25,6 +28,13 @@ function reloadData() {
 
     };
 
+    //A list showing which round corresponds to regular, finals and both
+    var seasonToRound = {
+        bothSeasons: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
+        regular: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
+        finals: ["15", "16", "17"]
+    }
+
 
     var teamData = {};
 
@@ -40,9 +50,16 @@ function reloadData() {
 
             data.forEach(function (row) {
 
+                //Add rows based on round number 
                 if (row["Home Team"] === element || row["Away Team"] === element) {
 
-                    d.push(row);
+                    seasonToRound[checkedSeasonValue].forEach(function (round) {
+
+                        if (row["Round"] === round) {
+                            d.push(row);
+                        }
+
+                    });
 
                 }
 
@@ -52,10 +69,11 @@ function reloadData() {
 
         });
 
-        //  console.log(teamData);
+        console.log(teamData);
 
     });
 
+    //location.reload();
 
 }
 
@@ -103,17 +121,28 @@ var getTeamData = new Promise(function (resolve, reject) {
 
                 if (row["Home Team"] === element || row["Away Team"] === element) {
 
+                    var score = row["Score"].toString();
+                    var T1 = score.slice(score.length - 5, score.length - 3);
+                    var T2 = score.slice(score.length - 2, score.length);
+
+                    row["Home Score"] = T1;
+                    row["Away Score"] = T2;
+
                     d.push(row);
 
                 }
 
             });
 
+
+
+
+
             teamData[element] = d;
 
         });
 
-        //  console.log(teamData);
+        console.log(teamData);
 
         resolve(teamData);
     });
