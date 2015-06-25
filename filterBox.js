@@ -98,6 +98,14 @@ function setCompFields() {
 
 }
 
+d3.select("body").append("p");
+
+d3.select("body")
+    .append("input")
+    .attr("type", "button")
+    .attr("onclick", "location.reload()")
+    .attr("value", "Load Data");
+
 
 //reload the csv data based on the filter options 
 function reloadData() {
