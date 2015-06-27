@@ -14,7 +14,7 @@ var x = 0,
 var infoBoxesContainer = canvas.append("svg")
     .attr("x", (width / 2) - (1150 / 2))
     .attr("y", 125)
-    .attr("width", 1500)
+    .attr("width", 1150)
     .attr("height", 1700);
 
 
@@ -24,7 +24,9 @@ function addInfoboxes() {
 
         var numOfTeams = Object.keys(result).length;
 
-        console.log(result);
+        //console.log(result);
+
+        var seasonType = $('input[name="season"]:checked').val();
 
         //for every team
         $.each(result, function (k, v) {
@@ -91,6 +93,78 @@ function addInfoboxes() {
                 // console.log(v[j]);
 
 
+                if (seasonType === "regular") {
+
+                    if (v[j] === undefined || v[j]["Round"] === "15" || v[j]["Round"] === "16" || v[j]["Round"] === "17") {
+                        continue;
+                    }
+                } else if (seasonType === "finals") {
+
+                    if (v[j] === undefined) {
+                        infoBox.append("rect")
+                            .attr("x", rx)
+                            .attr("y", ry)
+                            .attr("width", 45)
+                            .attr("height", 45)
+                            .attr("rx", 5)
+                            .attr("ry", 5)
+                            .style("fill", "Grey");
+
+                        rx += 47;
+                        index++;
+                        roundPlusOne++;
+                        continue;
+                    }
+
+                    switch (v[j]["Round"]) {
+                        case "1":
+                            continue;
+                            break;
+                        case "2":
+                            continue;
+                            break;
+                        case "3":
+                            continue;
+                            break;
+                        case "4":
+                            continue;
+                            break;
+                        case "5":
+                            continue;
+                            break;
+                        case "6":
+                            continue;
+                            break;
+                        case "7":
+                            continue;
+                            break;
+                        case "8":
+                            continue;
+                            break;
+                        case "9":
+                            continue;
+                            break;
+                        case "10":
+                            continue;
+                            break;
+                        case "11":
+                            continue;
+                            break;
+                        case "12":
+                            continue;
+                            break;
+                        case "13":
+                            continue;
+                            break;
+                        case "14":
+                            continue;
+                            break;
+                    }
+
+
+
+
+                }
 
 
 
@@ -140,29 +214,33 @@ function addInfoboxes() {
 
                 if (actRound != roundPlusOne && actRound != 17) {
 
-                    infoBox.append("rect")
-                        .attr("x", rx)
-                        .attr("y", ry)
-                        .attr("width", 45)
-                        .attr("height", 45)
-                        .attr("rx", 5)
-                        .attr("ry", 5)
-                        .style("fill", "Pink");
+                    if (seasonType != "finals") {
+                        infoBox.append("rect")
+                            .attr("x", rx)
+                            .attr("y", ry)
+                            .attr("width", 45)
+                            .attr("height", 45)
+                            .attr("rx", 5)
+                            .attr("ry", 5)
+                            .style("fill", "Pink");
 
-                    infoBox.append("text")
-                        .attr("x", rx + (45 / 2))
-                        .attr("y", ry + (45 / 2) + 4)
-                        .attr("text-anchor", "middle")
-                        .text("BYE");
+                        infoBox.append("text")
+                            .attr("x", rx + (45 / 2))
+                            .attr("y", ry + (45 / 2) + 4)
+                            .attr("text-anchor", "middle")
+                            .text("BYE");
 
-                    index++;
+                        index++;
 
-                    if (index < 10) {
-                        rx += 47;
-                    } else {
-                        index = 0;
-                        rx = 20;
-                        ry = 202;
+
+                        if (index < 10) {
+                            rx += 47;
+                        } else {
+                            index = 0;
+                            rx = 20;
+                            ry = 202;
+                        }
+
                     }
 
                     //for the actual round
