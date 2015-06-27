@@ -116,7 +116,7 @@ d3.select("body")
 
 
 //reload the csv data based on the filter options 
-function reloadData() {
+var reloadData = new Promise(function (resolve, reject) {
 
 
     //Get the value of the each checked button 
@@ -188,9 +188,12 @@ function reloadData() {
 
     });
 
+    resolve(teamData);
+
+
     //location.reload();
 
-}
+});
 
 //Get the data for each depending on the filters
 var getTeamData = new Promise(function (resolve, reject) {
