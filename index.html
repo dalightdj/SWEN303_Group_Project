@@ -112,10 +112,12 @@
 
         var comparisonsBox = canvas.append("g");
 
-        function comparisonsBoxFunc(){
+        comparisonsBoxFunc();
 
-            console.log(compareTeam1);
-            console.log(compareTeam2);
+        function comparisonsBoxFunc(){
+            comparisonsBox.remove();
+            comparisonsBox = canvas.append("g");
+
             //draw main box
             comparisonsBox.append("rect")
                 .attr("rx", 20)
@@ -129,6 +131,39 @@
                 })
                 .style("fill", "#214282");
             //.style("fill", d3.scale.category20c());
+
+
+            //close button
+            comparisonsBox.append("rect")
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("x", comparisonsBoxX+comparisonsBoxWidth-30)
+                .attr("y", comparisonsBoxY-15)
+                .attr("width", 46)
+                .attr("height", 46)
+                .style("fill", "#E60000");
+            comparisonsBox.append("text")
+                .attr("x", comparisonsBoxX+comparisonsBoxWidth-30+23)
+                .attr("y", comparisonsBoxY-15+33)
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .attr("font-family", "sans-serif")
+                .style("font-size", "30px")
+                .style("font-weight", "600")
+                .text("X");
+            comparisonsBox.append("rect")
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("x", comparisonsBoxX+comparisonsBoxWidth-30)
+                .attr("y", comparisonsBoxY-15)
+                .attr("width", 46)
+                .attr("height", 46)
+                .style("fill", "#E60000")
+                .attr("fill-opacity", 0)
+                .on("click", function(){
+                    //comparisonsBox.attr("fill-opacity", 0);
+                    comparisonsBox.remove();
+                });
 
 
 
@@ -219,8 +254,6 @@
                     
                     var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
                     var currentBarWidth = barWidth*(percentage/100);
-                    console.log("current bar width: " + currentBarWidth);
-                    console.log("percentage: " + comparisonsTextData[i]);
 
                     //draw bar at origin
                     var rect = comparisonsBox.append("rect")
@@ -303,8 +336,6 @@
                     
                     var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
                     var currentBarWidth = barWidth*(percentage/100);
-                    console.log("current bar width: " + currentBarWidth);
-                    console.log("percentage: " + comparisonsTextData[i]);
 
                     //draw bar at origin
                     var rect = comparisonsBox.append("rect")
@@ -397,17 +428,6 @@
                         awayScore = data[teamName][i]["Away Score"];
 
 
-                    //PRINT STATEMENTS
-                    // if(homeGame){
-                    //     console.log("Home game");
-                    // }
-                    // else{
-                    //     console.log("Away game");
-                    // }
-                    // console.log("Home score = '" + homeScore + "'");
-                    // console.log("Away score = '" + awayScore + "'");
-
-
                     if (homeGame) {
                         averageScore += +homeScore;
                         goalsFor += +homeScore;
@@ -441,17 +461,17 @@
                 averageScore = Math.round(averageScore/data[teamName].length);
 
                 // PRINT STATEMENTS
-                console.log("wins: " + wins);
-                console.log("losses: " + losses);
-                console.log("home wins: " + homeWins);
-                console.log("home losses: " + homeLosses);
-                console.log("goals for: " + goalsFor);
-                console.log("goals against: " + goalsAgainst);
-                console.log("average score: " + averageScore);
-                console.log("average wins: " + wins/(wins+losses));
-                console.log("average losses: " + losses/(wins+losses));
-                console.log("average home wins: " + homeWins/(homeWins+homeLosses));
-                console.log("average home losses: " + homeLosses/(homeWins+homeLosses));
+                // console.log("wins: " + wins);
+                // console.log("losses: " + losses);
+                // console.log("home wins: " + homeWins);
+                // console.log("home losses: " + homeLosses);
+                // console.log("goals for: " + goalsFor);
+                // console.log("goals against: " + goalsAgainst);
+                // console.log("average score: " + averageScore);
+                // console.log("average wins: " + wins/(wins+losses));
+                // console.log("average losses: " + losses/(wins+losses));
+                // console.log("average home wins: " + homeWins/(homeWins+homeLosses));
+                // console.log("average home losses: " + homeLosses/(homeWins+homeLosses));
                 
                 return comparisonsTextData = [wins, losses, homeWins, homeLosses, goalsFor, goalsAgainst, averageScore, wins/(wins+losses), losses/(wins+losses), homeWins/(homeWins+homeLosses), homeLosses/(homeWins+homeLosses)];//the first seven indices are the values, the second 4 are the percentages
             }
