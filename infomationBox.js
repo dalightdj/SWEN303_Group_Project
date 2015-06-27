@@ -158,6 +158,14 @@ function addInfoboxes() {
                     rx += 47;
                     index++;
 
+                    if (index < 10) {
+                        rx += 47;
+                    } else {
+                        index = 0;
+                        rx = 20;
+                        ry = 202;
+                    }
+
                     //for the actual round
                     infoBox.append("rect")
                         .attr("x", rx)
