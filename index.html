@@ -30,7 +30,7 @@
         <input type="radio" name="season" id="finalsButton" value="finals" />Finals
     </form>
 
-    <input type="button" id="compareButton" onclick="" value="Compare" />
+    <input type="button" id="compareButton" onclick="comparisonsBoxFunc()" value="Compare" />
 
 
 
@@ -40,18 +40,9 @@
         var width = 1500,
             height = 1500;
 
-        //filter choices
-        var yearChoices = [2013, 2012, 2011, 2010, 2009, 2008],
-            countryChoices = ["NZ/Aus", "NZ", "Aus"],
-            seasonTypeChoices = ["Regular/Finals", "Regular", "Finals"],
-            teams = ["AdelaideThunderbirds", "CanterburyTactix", "CentralPulse", "MelbourneVixens", "NorthernMystics", "NSWSwifts", "QueenslandFirebirds", "SouthernSteel", "WaikatoBayOfPlentyMagic", "WestCoastFever"];
-
         //filters
-        var file = "Tables/" + yearChoices[0] + "-Table1.csv",
-            country = countryChoices[0],
-            seasonType = seasonTypeChoices[0],
-            compareTeam1 = teams[2],
-            compareTeam2 = teams[8];
+        var compareTeam1 = "AdelaideThunderbirds",
+            compareTeam2 = "AdelaideThunderbirds";
 
 
 
@@ -112,6 +103,8 @@
         //*******************************************
         //*************COMPARISONS BOX***************
         //*******************************************
+
+        
         var comparisonsBoxWidth = 900,
             comparisonsBoxHeight = 600
         comparisonsBoxX = (width / 2) - (comparisonsBoxWidth / 2)
@@ -119,258 +112,263 @@
 
         var comparisonsBox = canvas.append("g");
 
-        //draw main box
-        comparisonsBox.append("rect")
-            .attr("rx", 20)
-            .attr("ry", 20)
-            .attr("x", comparisonsBoxX)
-            .attr("y", comparisonsBoxY)
-            .attr("width", comparisonsBoxWidth)
-            .attr("height", comparisonsBoxHeight)
-            .attr("transform", function (d, i) {
-                return "scale(" + (1 - d / 25) * 20 + ")";
-            })
-            .style("fill", "#214282");
-        //.style("fill", d3.scale.category20c());
+        function comparisonsBoxFunc(){
+
+            console.log(compareTeam1);
+            console.log(compareTeam2);
+            //draw main box
+            comparisonsBox.append("rect")
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .attr("x", comparisonsBoxX)
+                .attr("y", comparisonsBoxY)
+                .attr("width", comparisonsBoxWidth)
+                .attr("height", comparisonsBoxHeight)
+                .attr("transform", function (d, i) {
+                    return "scale(" + (1 - d / 25) * 20 + ")";
+                })
+                .style("fill", "#214282");
+            //.style("fill", d3.scale.category20c());
 
 
 
-        //draw logos
-        var logoWidth = (comparisonsBoxWidth / 3),
-            logoHeight = 160,
-            logoPadding = 30,
-            logoY = comparisonsBoxY + logoPadding;
+            //draw logos
+            var logoWidth = (comparisonsBoxWidth / 3),
+                logoHeight = 160,
+                logoPadding = 30,
+                logoY = comparisonsBoxY + logoPadding;
 
 
-        comparisonsBox.append("svg:image")
-            .attr("xlink:href", "Images/Logos/" + compareTeam1 + ".jpg")
-            .attr("x", comparisonsBoxX + logoPadding)
-            .attr("y", logoY)
-            .attr("width", logoWidth)
-            .attr("height", logoHeight);
+            comparisonsBox.append("svg:image")
+                .attr("xlink:href", "Images/Logos/" + compareTeam1 + ".jpg")
+                .attr("x", comparisonsBoxX + logoPadding)
+                .attr("y", logoY)
+                .attr("width", logoWidth)
+                .attr("height", logoHeight);
 
-        comparisonsBox.append("svg:image")
-            .attr("xlink:href", "Images/Logos/" + compareTeam2 + ".jpg")
-            .attr("x", (comparisonsBoxX + comparisonsBoxWidth) - logoPadding - logoWidth)
-            .attr("y", logoY)
-            .attr("width", logoWidth)
-            .attr("height", logoHeight);
-
-
-        //draw text
-        var comparisonsTextX = comparisonsBoxX + (comparisonsBoxWidth / 2),
-            comparisonsTextY = logoY + (logoHeight / 2) + 5;
-
-        comparisonsBox.append("text")
-            .attr("x", comparisonsTextX)
-            .attr("y", comparisonsTextY)
-            .attr("text-anchor", "middle")
-            .attr("fill", "white")
-            .attr("font-family", "sans-serif")
-            .style("font-size", "40px")
-            .style("font-weight", "600")
-            .text("vs");
+            comparisonsBox.append("svg:image")
+                .attr("xlink:href", "Images/Logos/" + compareTeam2 + ".jpg")
+                .attr("x", (comparisonsBoxX + comparisonsBoxWidth) - logoPadding - logoWidth)
+                .attr("y", logoY)
+                .attr("width", logoWidth)
+                .attr("height", logoHeight);
 
 
-        var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Goals For", "Goals Against", "Avg. Score"];
-        comparisonsTextY += 130;
+            //draw text
+            var comparisonsTextX = comparisonsBoxX + (comparisonsBoxWidth / 2),
+                comparisonsTextY = logoY + (logoHeight / 2) + 5;
 
-        for (var i = 0; i < comparisonsTextData.length; i++) {
             comparisonsBox.append("text")
                 .attr("x", comparisonsTextX)
                 .attr("y", comparisonsTextY)
                 .attr("text-anchor", "middle")
                 .attr("fill", "white")
                 .attr("font-family", "sans-serif")
-                .style("font-size", "30px")
-                .style("font-weight", "500")
-                .text(comparisonsTextData[i]);
+                .style("font-size", "40px")
+                .style("font-weight", "600")
+                .text("vs");
 
-            comparisonsTextY += 55;
+
+            var comparisonsTextData = ["Wins", "Losses", "Home Wins", "Home Losses", "Goals For", "Goals Against", "Avg. Score"];
+            comparisonsTextY += 130;
+
+            for (var i = 0; i < comparisonsTextData.length; i++) {
+                comparisonsBox.append("text")
+                    .attr("x", comparisonsTextX)
+                    .attr("y", comparisonsTextY)
+                    .attr("text-anchor", "middle")
+                    .attr("fill", "white")
+                    .attr("font-family", "sans-serif")
+                    .style("font-size", "30px")
+                    .style("font-weight", "500")
+                    .text(comparisonsTextData[i]);
+
+                comparisonsTextY += 55;
+            }
+
+            //until i can access the filters
+            // compareTeam1 = "Central Pulse";
+            // compareTeam2 = "Waikato Bay of Plenty Magic"
+
+            //draw statistic values
+            getTeamData.then(function (data) {
+
+                //get left team's information
+                comparisonsTextData = calcValues(data, compareTeam1);
+                //add left side team's values to canvas
+                comparisonsTextY = logoY + (logoHeight / 2) + 135;
+                for (var i = 0; i < 7; i++) {
+                    comparisonsBox.append("text")
+                        .attr("x", comparisonsTextX - 105)
+                        .attr("y", comparisonsTextY)
+                        .attr("text-anchor", "end")
+                        .attr("fill", "white")
+                        .attr("font-family", "sans-serif")
+                        .style("font-size", "30px")
+                        .style("font-weight", "500")
+                        .text(comparisonsTextData[i]);
+
+                    comparisonsTextY += 55;
+                }
+
+
+                //draw progress bar
+                barWidth = 180;
+                comparisonsTextY = logoY + (logoHeight / 2) + 110;
+                for(var i = 7; i < comparisonsTextData.length; i++){
+                    
+                    var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
+                    var currentBarWidth = barWidth*(percentage/100);
+                    console.log("current bar width: " + currentBarWidth);
+                    console.log("percentage: " + comparisonsTextData[i]);
+
+                    //draw bar at origin
+                    var rect = comparisonsBox.append("rect")
+                            .attr("x", comparisonsTextX-165)
+                            .attr("y", comparisonsTextY)
+                            .attr("width", 0)
+                            .attr("height", 30)
+                            .attr("fill", "#AC1963");
+
+                    //animate bar to stretch to correct width
+                    rect.transition().duration(3000)
+                            .attr("x", comparisonsTextX-165-currentBarWidth)
+                            .attr("y", comparisonsTextY)
+                            .attr("width", currentBarWidth)
+                            .attr("height", 30);
+                            //.attr("fill", "black");
+
+
+                    //draw percentages
+                    var text = comparisonsBox.append("text")
+                        .attr("x", comparisonsTextX-175)
+                        .attr("y", comparisonsTextY+25)
+                        .attr("text-anchor", "end")
+                        .attr("fill", "white")
+                        .attr("fill-opacity", 0)
+                        .attr("font-family", "sans-serif")
+                        .style("font-size", "25px")
+                        .style("font-weight", "500")
+                        .text(percentage);
+
+                    //animate percentages to move with ba
+                    text.transition().duration(3000)
+                        .attr("x", comparisonsTextX-175-currentBarWidth)
+                        .attr("y", comparisonsTextY+25)
+                        .attr("text-anchor", "end")
+                        .attr("fill", "white")
+                        .attr("fill-opacity", 1)
+                        .attr("font-family", "sans-serif")
+                        .style("font-size", "25px")
+                        .style("font-weight", "500")
+                        .tween("text", function(){
+                            var interpolater = d3.interpolateRound(0, this.textContent);
+
+                            return function(t){
+                                this.textContent = interpolater(t) + "%";
+                            };
+                        });
+
+                     comparisonsTextY += 55;
+                }
+
+
+
+
+
+
+
+
+                //get right team's information
+                comparisonsTextData = calcValues(data, compareTeam2);
+                //add values to canvas
+                comparisonsTextY = logoY + (logoHeight / 2) + 135;
+                for (var i = 0; i < 7; i++) {
+                    comparisonsBox.append("text")
+                        .attr("x", comparisonsTextX + 105)
+                        .attr("y", comparisonsTextY)
+                        .attr("text-anchor", "start")
+                        .attr("fill", "white")
+                        .attr("font-family", "sans-serif")
+                        .style("font-size", "30px")
+                        .style("font-weight", "500")
+                        .text(comparisonsTextData[i]);
+
+                    comparisonsTextY += 55;
+                }
+
+
+                comparisonsTextY = logoY + (logoHeight / 2) + 110;
+                for(var i = 7; i < comparisonsTextData.length; i++){
+                    
+                    var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
+                    var currentBarWidth = barWidth*(percentage/100);
+                    console.log("current bar width: " + currentBarWidth);
+                    console.log("percentage: " + comparisonsTextData[i]);
+
+                    //draw bar at origin
+                    var rect = comparisonsBox.append("rect")
+                            .attr("x", comparisonsTextX+165)
+                            .attr("y", comparisonsTextY)
+                            .attr("width", 0)
+                            .attr("height", 30)
+                            .attr("fill", "#AC1963");
+
+                    //animate bar to stretch to correct width
+                    rect.transition().duration(3000)
+                            .attr("x", comparisonsTextX+165)
+                            .attr("y", comparisonsTextY)
+                            .attr("width", currentBarWidth)
+                            .attr("height", 30);
+                            //.attr("fill", "black");
+
+
+                    //draw percentages
+                    var text = comparisonsBox.append("text")
+                        .attr("x", comparisonsTextX+175)
+                        .attr("y", comparisonsTextY+25)
+                        .attr("text-anchor", "start")
+                        .attr("fill", "white")
+                        .attr("fill-opacity", 0)
+                        .attr("font-family", "sans-serif")
+                        .style("font-size", "25px")
+                        .style("font-weight", "500")
+                        .text(percentage);
+
+                    //animate percentages to move with ba
+                    text.transition().duration(3000)
+                        .attr("x", comparisonsTextX+175+currentBarWidth)
+                        .attr("y", comparisonsTextY+25)
+                        .attr("text-anchor", "start")
+                        .attr("fill", "white")
+                        .attr("fill-opacity", 1)
+                        .attr("font-family", "sans-serif")
+                        .style("font-size", "25px")
+                        .style("font-weight", "500")
+                        .tween("text", function(){
+                            var interpolater = d3.interpolateRound(0, this.textContent);
+
+                            return function(t){
+                                this.textContent = interpolater(t) + "%";
+                            };
+                        });
+
+                     comparisonsTextY += 55;
+                }
+
+                
+
+
+
+                // //animate text
+                // var x = 30;
+                // for(var i = 7; i <comparisonsTextData.length; i++){
+                //     var texts = d3.selectAll("text")
+                //     x+=5;
+                //     texts.transition().duration(5000).style("font-size", x + "px");
+                // }
+            });
         }
-
-        //until i can access the filters
-        compareTeam1 = "Central Pulse";
-        compareTeam2 = "Waikato Bay of Plenty Magic"
-
-        //draw statistic values
-        getTeamData.then(function (data) {
-
-            //get left team's information
-            comparisonsTextData = calcValues(data, compareTeam1);
-            //add left side team's values to canvas
-            comparisonsTextY = logoY + (logoHeight / 2) + 135;
-            for (var i = 0; i < 7; i++) {
-                comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX - 105)
-                    .attr("y", comparisonsTextY)
-                    .attr("text-anchor", "end")
-                    .attr("fill", "white")
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "30px")
-                    .style("font-weight", "500")
-                    .text(comparisonsTextData[i]);
-
-                comparisonsTextY += 55;
-            }
-
-
-            //draw progress bar
-            barWidth = 180;
-            comparisonsTextY = logoY + (logoHeight / 2) + 110;
-            for(var i = 7; i < comparisonsTextData.length; i++){
-                
-                var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
-                var currentBarWidth = barWidth*(percentage/100);
-                console.log("current bar width: " + currentBarWidth);
-                console.log("percentage: " + comparisonsTextData[i]);
-
-                //draw bar at origin
-                var rect = comparisonsBox.append("rect")
-                        .attr("x", comparisonsTextX-165)
-                        .attr("y", comparisonsTextY)
-                        .attr("width", 0)
-                        .attr("height", 30)
-                        .attr("fill", "#AC1963");
-
-                //animate bar to stretch to correct width
-                rect.transition().duration(3000)
-                        .attr("x", comparisonsTextX-165-currentBarWidth)
-                        .attr("y", comparisonsTextY)
-                        .attr("width", currentBarWidth)
-                        .attr("height", 30);
-                        //.attr("fill", "black");
-
-
-                //draw percentages
-                var text = comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX-175)
-                    .attr("y", comparisonsTextY+25)
-                    .attr("text-anchor", "end")
-                    .attr("fill", "white")
-                    .attr("fill-opacity", 0)
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "25px")
-                    .style("font-weight", "500")
-                    .text(percentage);
-
-                //animate percentages to move with ba
-                text.transition().duration(3000)
-                    .attr("x", comparisonsTextX-175-currentBarWidth)
-                    .attr("y", comparisonsTextY+25)
-                    .attr("text-anchor", "end")
-                    .attr("fill", "white")
-                    .attr("fill-opacity", 1)
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "25px")
-                    .style("font-weight", "500")
-                    .tween("text", function(){
-                        var interpolater = d3.interpolateRound(0, this.textContent);
-
-                        return function(t){
-                            this.textContent = interpolater(t) + "%";
-                        };
-                    });
-
-                 comparisonsTextY += 55;
-            }
-
-
-
-
-
-
-
-
-            //get right team's information
-            comparisonsTextData = calcValues(data, compareTeam2);
-            //add values to canvas
-            comparisonsTextY = logoY + (logoHeight / 2) + 135;
-            for (var i = 0; i < 7; i++) {
-                comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX + 105)
-                    .attr("y", comparisonsTextY)
-                    .attr("text-anchor", "start")
-                    .attr("fill", "white")
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "30px")
-                    .style("font-weight", "500")
-                    .text(comparisonsTextData[i]);
-
-                comparisonsTextY += 55;
-            }
-
-
-            comparisonsTextY = logoY + (logoHeight / 2) + 110;
-            for(var i = 7; i < comparisonsTextData.length; i++){
-                
-                var percentage = (barWidth/barWidth)*comparisonsTextData[i]*100;
-                var currentBarWidth = barWidth*(percentage/100);
-                console.log("current bar width: " + currentBarWidth);
-                console.log("percentage: " + comparisonsTextData[i]);
-
-                //draw bar at origin
-                var rect = comparisonsBox.append("rect")
-                        .attr("x", comparisonsTextX+165)
-                        .attr("y", comparisonsTextY)
-                        .attr("width", 0)
-                        .attr("height", 30)
-                        .attr("fill", "#AC1963");
-
-                //animate bar to stretch to correct width
-                rect.transition().duration(3000)
-                        .attr("x", comparisonsTextX+165)
-                        .attr("y", comparisonsTextY)
-                        .attr("width", currentBarWidth)
-                        .attr("height", 30);
-                        //.attr("fill", "black");
-
-
-                //draw percentages
-                var text = comparisonsBox.append("text")
-                    .attr("x", comparisonsTextX+175)
-                    .attr("y", comparisonsTextY+25)
-                    .attr("text-anchor", "start")
-                    .attr("fill", "white")
-                    .attr("fill-opacity", 0)
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "25px")
-                    .style("font-weight", "500")
-                    .text(percentage);
-
-                //animate percentages to move with ba
-                text.transition().duration(3000)
-                    .attr("x", comparisonsTextX+175+currentBarWidth)
-                    .attr("y", comparisonsTextY+25)
-                    .attr("text-anchor", "start")
-                    .attr("fill", "white")
-                    .attr("fill-opacity", 1)
-                    .attr("font-family", "sans-serif")
-                    .style("font-size", "25px")
-                    .style("font-weight", "500")
-                    .tween("text", function(){
-                        var interpolater = d3.interpolateRound(0, this.textContent);
-
-                        return function(t){
-                            this.textContent = interpolater(t) + "%";
-                        };
-                    });
-
-                 comparisonsTextY += 55;
-            }
-
-            
-
-
-
-            // //animate text
-            // var x = 30;
-            // for(var i = 7; i <comparisonsTextData.length; i++){
-            //     var texts = d3.selectAll("text")
-            //     x+=5;
-            //     texts.transition().duration(5000).style("font-size", x + "px");
-            // }
-        });
 
 
         function calcValues(data, teamName) {
