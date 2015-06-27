@@ -140,8 +140,6 @@ function addInfoboxes() {
 
                 if (actRound != roundPlusOne && actRound != 17) {
 
-
-
                     infoBox.append("rect")
                         .attr("x", rx)
                         .attr("y", ry)
@@ -176,13 +174,19 @@ function addInfoboxes() {
                             } else {
                                 return "#E60000";
                             }
+                        }).append("title")
+                        .text(function () {
+                            return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
                         });
 
                     infoBox.append("text")
                         .attr("x", rx + (45 / 2))
                         .attr("y", ry + (45 / 2) + 4)
                         .attr("text-anchor", "middle")
-                        .text(actRound);
+                        .text(actRound).append("title")
+                        .text(function () {
+                            return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
+                        });
 
                     roundPlusOne += 2;
                 } else {
