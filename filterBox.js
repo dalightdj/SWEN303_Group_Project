@@ -30,7 +30,7 @@ dropDownBox1.append("option")
     .text("Northern Mystics");
 
 dropDownBox1.append("option")
-    .attr("value", "NSW Swifts")
+    .attr("value", "New South Wales Swifts")
     .text("NSW Swifts");
 
 dropDownBox1.append("option")
@@ -247,7 +247,7 @@ var getTeamData = new Promise(function (resolve, reject) {
 
         });
 
-        //console.log(teamData);
+        // console.log(teamData);
 
         resolve(teamData);
     });
