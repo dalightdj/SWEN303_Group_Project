@@ -155,7 +155,6 @@ function addInfoboxes() {
                         .attr("text-anchor", "middle")
                         .text("BYE");
 
-                    rx += 47;
                     index++;
 
                     if (index < 10) {
