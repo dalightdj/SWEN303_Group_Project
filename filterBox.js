@@ -9,6 +9,14 @@ var dropDownBox2 = d3.select("body")
     .attr("onChange", "setCompFields()");
 
 
+d3.select("body")
+    .append("input")
+    .attr("type", "button")
+    .attr("id", "compareButton")
+    .attr("onclick", "comparisonsBoxFunc()")
+    .attr("value", "Compare");
+
+
 dropDownBox1.append("option")
     .attr("value", "Adelaide Thunderbirds")
     .text("AdelaideThunderbirds");
