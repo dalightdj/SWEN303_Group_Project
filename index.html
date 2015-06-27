@@ -29,6 +29,8 @@
         <input type="radio" name="season" id="regularButton" value="regular" />Regular
         <input type="radio" name="season" id="finalsButton" value="finals" />Finals
     </form>
+    <br/>
+
 
     <!-- The script which contians the filter box code -->
     <script type="text/javascript" src="filterBox.js"></script>
@@ -469,6 +471,12 @@
             }
             //*******************************************
             //*******************************************
+
+            function RD(){
+                reloadData.then(function(data){
+                    location.reload();
+                });
+            }
     </script>
     <!-- This is loaded here because it needs the canvas to be created because it uses it-->
     <script type="text/javascript" src="infomationBox.js"></script>
