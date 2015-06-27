@@ -242,9 +242,8 @@ var getTeamData = new Promise(function (resolve, reject) {
             });
 
 
-            var teamNme = element.replace(/\s+/g, '');
 
-            teamData[teamNme] = d;
+            teamData[element] = d;
 
         });
 
