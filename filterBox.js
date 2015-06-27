@@ -242,10 +242,9 @@ var getTeamData = new Promise(function (resolve, reject) {
             });
 
 
+            var teamNme = element.replace(/\s+/g, '');
 
-
-
-            teamData[element] = d;
+            teamData[teamNme] = d;
 
         });
 
