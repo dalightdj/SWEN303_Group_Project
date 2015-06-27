@@ -6,13 +6,16 @@ var x = 0,
     ry = 155,
     index = 0,
     actRound = 0,
-    roundPlusOne = 1;
+    roundPlusOne = 1,
+    newRoundIndex = 1;
 
 
 
 var infoBoxesContainer = canvas.append("svg")
+    .attr("x", (width / 2) - (1150 / 2))
+    .attr("y", 125)
     .attr("width", 1500)
-    .attr("height", 1500);
+    .attr("height", 1700);
 
 
 function addInfoboxes() {
@@ -21,11 +24,11 @@ function addInfoboxes() {
 
         var numOfTeams = Object.keys(result).length;
 
-        //console.log(result);
+        console.log(result);
 
         //for every team
         $.each(result, function (k, v) {
-            //console.log(k);
+            // console.log(k);
 
 
             //Change x and y position
@@ -51,7 +54,9 @@ function addInfoboxes() {
             infoBox.append("rect")
                 .attr("width", 500)
                 .attr("height", 250)
-                .style("fill", "Yellow");
+                .attr("rx", 20)
+                .attr("ry", 20)
+                .style("fill", "#ADD8E6");
 
 
             var teamN = "Images/Logos/" + k.replace(/\s+/g, '') + ".jpg";
@@ -78,12 +83,39 @@ function addInfoboxes() {
 
 
 
+
+
             //for every round given a team
-            for (var j = 0; j < v.length; j++) {
+            for (var j = 0; j < 16; j++) {
                 // console.log(v[j]);
 
 
-                actRound = v[j]["Round"];
+
+
+
+
+                if (v[j] === undefined) {
+                    infoBox.append("rect")
+                        .attr("x", rx)
+                        .attr("y", ry)
+                        .attr("width", 45)
+                        .attr("height", 45)
+                        .attr("rx", 5)
+                        .attr("ry", 5)
+                        .style("fill", "Grey");
+
+                    rx += 47;
+                    index++;
+                    roundPlusOne++;
+
+                    continue;
+                }
+
+
+
+
+                actRound = v[j].Round;
+
 
                 var score = v[j]["Score"].toString();
                 var T1 = score.slice(score.length - 5, score.length - 3);
@@ -111,11 +143,14 @@ function addInfoboxes() {
                         .attr("y", ry)
                         .attr("width", 45)
                         .attr("height", 45)
+                        .attr("rx", 5)
+                        .attr("ry", 5)
                         .style("fill", "Pink");
 
                     infoBox.append("text")
-                        .attr("x", rx + 8)
-                        .attr("y", ry + 25)
+                        .attr("x", rx + (45 / 2))
+                        .attr("y", ry + (45 / 2) + 4)
+                        .attr("text-anchor", "middle")
                         .text("BYE");
 
                     rx += 47;
@@ -127,19 +162,22 @@ function addInfoboxes() {
                         .attr("y", ry)
                         .attr("width", 45)
                         .attr("height", 45)
+                        .attr("rx", 5)
+                        .attr("ry", 5)
                         .style("fill", function () {
                             if (T1 > T2) {
                                 return "Green";
                             } else if (T1 === T2) {
                                 return "Blue";
                             } else {
-                                return "Red";
+                                return "#E60000";
                             }
                         });
 
                     infoBox.append("text")
-                        .attr("x", rx + 17)
-                        .attr("y", ry + 25)
+                        .attr("x", rx + (45 / 2))
+                        .attr("y", ry + (45 / 2) + 4)
+                        .attr("text-anchor", "middle")
                         .text(actRound);
 
                     roundPlusOne += 2;
@@ -150,13 +188,15 @@ function addInfoboxes() {
                         .attr("y", ry)
                         .attr("width", 45)
                         .attr("height", 45)
+                        .attr("rx", 5)
+                        .attr("ry", 5)
                         .style("fill", function () {
                             if ((HomeTeamToScore[0] === k && HomeTeamToScore[1] > AwayTeamToScore[1]) || (AwayTeamToScore[0] === k && AwayTeamToScore[1] > HomeTeamToScore[1])) {
                                 return "Green";
                             } else if (HomeTeamToScore[2] === "draw" || AwayTeamToScore[2] === "draw") {
                                 return "Blue";
                             } else {
-                                return "Red";
+                                return "#E60000";
                             }
                         })
                         .append("title")
@@ -165,9 +205,13 @@ function addInfoboxes() {
                         });
 
                     infoBox.append("text")
-                        .attr("x", rx + 17)
-                        .attr("y", ry + 25)
-                        .text(v[j]["Round"]);
+                        .attr("x", rx + (45 / 2))
+                        .attr("y", ry + (45 / 2) + 4)
+                        .attr("text-anchor", "middle")
+                        .text(v[j]["Round"]).append("title")
+                        .text(function () {
+                            return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
+                        });
 
                     roundPlusOne++;
 
