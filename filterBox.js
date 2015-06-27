@@ -42,7 +42,7 @@ dropDownBox1.append("option")
     .text("Southern Steel");
 
 dropDownBox1.append("option")
-    .attr("value", "WaikatoBayOfPlentyMagic")
+    .attr("value", "WaikatoBayofPlentyMagic")
     .text("Waikato Bay Of Plenty Magic");
 
 dropDownBox1.append("option")
