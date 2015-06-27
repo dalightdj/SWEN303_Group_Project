@@ -71,8 +71,9 @@ function addInfoboxes() {
             //Add team logo
             infoBox.append("svg:image")
                 .attr("xlink:href", teamN)
+                .attr("y", 5)
                 .attr("width", 500)
-                .attr("height", 150);
+                .attr("height", 145);
 
             //Resetting the values for new info box
             index = 0;
@@ -138,6 +139,9 @@ function addInfoboxes() {
 
 
                 if (actRound != roundPlusOne && actRound != 17) {
+
+
+
                     infoBox.append("rect")
                         .attr("x", rx)
                         .attr("y", ry)
