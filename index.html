@@ -20,12 +20,12 @@
         <input type="radio" name="year" id="2013Button" value="2013" />2013
         <br/>
         <br/>
-        <input type="radio" name="country" id="bothCountriesButton" value="both" checked/>Both
+        <input type="radio" name="country" id="bothCountriesButton" value="both" checked/>NZ/Aus
+        <input type="radio" name="country" id="nzButton" value="nz" />NZ
         <input type="radio" name="country" id="ausButton" value="aus" />Aus
-        <input type="radio" name="country" id="nzButton" value="nz" />Nz
         <br/>
         <br/>
-        <input type="radio" name="season" id="bothSeasonButton" value="bothSeasons" checked/>Both
+        <input type="radio" name="season" id="bothSeasonButton" value="bothSeasons" checked/>Regular/Finals
         <input type="radio" name="season" id="regularButton" value="regular" />Regular
         <input type="radio" name="season" id="finalsButton" value="finals" />Finals
     </form>
@@ -41,8 +41,8 @@
             height = 1500;
 
         //filters
-        var compareTeam1 = "AdelaideThunderbirds",
-            compareTeam2 = "AdelaideThunderbirds";
+        var compareTeam1 = "Adelaide Thunderbirds",
+            compareTeam2 = "Adelaide Thunderbirds";
 
 
 
@@ -140,14 +140,14 @@
 
 
             comparisonsBox.append("svg:image")
-                .attr("xlink:href", "Images/Logos/" + compareTeam1 + ".jpg")
+                .attr("xlink:href", "Images/Logos/" + compareTeam1.replace(/\s+/g, '') + ".jpg")
                 .attr("x", comparisonsBoxX + logoPadding)
                 .attr("y", logoY)
                 .attr("width", logoWidth)
                 .attr("height", logoHeight);
 
             comparisonsBox.append("svg:image")
-                .attr("xlink:href", "Images/Logos/" + compareTeam2 + ".jpg")
+                .attr("xlink:href", "Images/Logos/" + compareTeam2.replace(/\s+/g, '') + ".jpg")
                 .attr("x", (comparisonsBoxX + comparisonsBoxWidth) - logoPadding - logoWidth)
                 .attr("y", logoY)
                 .attr("width", logoWidth)
@@ -384,6 +384,7 @@
                 for (var i = 0; i < data[teamName].length; i++) {
                     var roundData = data[teamName][i];
 
+
                     if (roundData["Home Team"] == teamName) {
                         homeGame = true;
                     } else if (roundData["Away Team"] == teamName) {
@@ -460,7 +461,7 @@
     <!-- This is loaded here because it needs the canvas to be created because it uses it-->
     <script type="text/javascript" src="infomationBox.js"></script>
     <script>
-        addInfoboxes();
+        //addInfoboxes();
     </script>
 </body>
 
