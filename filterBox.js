@@ -10,83 +10,83 @@ var dropDownBox2 = d3.select("body")
 
 
 dropDownBox1.append("option")
-    .attr("value", "AdelaideThunderbirds")
+    .attr("value", "Adelaide Thunderbirds")
     .text("AdelaideThunderbirds");
 
 dropDownBox1.append("option")
-    .attr("value", "CanterburyTactix")
+    .attr("value", "Canterbury Tactix")
     .text("Canterbury Tactix");
 
 dropDownBox1.append("option")
-    .attr("value", "CentralPulse")
+    .attr("value", "Central Pulse")
     .text("Central Pulse");
 
 dropDownBox1.append("option")
-    .attr("value", "MelbourneVixens")
+    .attr("value", "Melbourne Vixens")
     .text("Melbourne Vixens");
 
 dropDownBox1.append("option")
-    .attr("value", "NorthernMystics")
+    .attr("value", "Northern Mystics")
     .text("Northern Mystics");
 
 dropDownBox1.append("option")
-    .attr("value", "NSWSwifts")
+    .attr("value", "NSW Swifts")
     .text("NSW Swifts");
 
 dropDownBox1.append("option")
-    .attr("value", "QueenslandFirebirds")
+    .attr("value", "Queensland Firebirds")
     .text("Queensland Firebirds");
 
 dropDownBox1.append("option")
-    .attr("value", "SouthernSteel")
+    .attr("value", "Southern Steel")
     .text("Southern Steel");
 
 dropDownBox1.append("option")
-    .attr("value", "WaikatoBayofPlentyMagic")
+    .attr("value", "Waikato Bay of PlentyMagic")
     .text("Waikato Bay Of Plenty Magic");
 
 dropDownBox1.append("option")
-    .attr("value", "WestCoastFever")
+    .attr("value", "West Coast Fever")
     .text("West Coast Fever");
 
 dropDownBox2.append("option")
-    .attr("value", "AdelaideThunderbirds")
+    .attr("value", "Adelaide Thunderbirds")
     .text("AdelaideThunderbirds");
 
 dropDownBox2.append("option")
-    .attr("value", "CanterburyTactix")
+    .attr("value", "Canterbury Tactix")
     .text("Canterbury Tactix");
 
 dropDownBox2.append("option")
-    .attr("value", "CentralPulse")
+    .attr("value", "Central Pulse")
     .text("Central Pulse");
 
 dropDownBox2.append("option")
-    .attr("value", "MelbourneVixens")
+    .attr("value", "Melbourne Vixens")
     .text("Melbourne Vixens");
 
 dropDownBox2.append("option")
-    .attr("value", "NorthernMystics")
+    .attr("value", "Northern Mystics")
     .text("Northern Mystics");
 
 dropDownBox2.append("option")
-    .attr("value", "NSWSwifts")
+    .attr("value", "NSW Swifts")
     .text("NSW Swifts");
 
 dropDownBox2.append("option")
-    .attr("value", "QueenslandFirebirds")
+    .attr("value", "Queensland Firebirds")
     .text("Queensland Firebirds");
 
 dropDownBox2.append("option")
-    .attr("value", "SouthernSteel")
+    .attr("value", "Southern Steel")
     .text("Southern Steel");
 
 dropDownBox2.append("option")
-    .attr("value", "WaikatoBayOfPlentyMagic")
+    .attr("value", "Waikato Bay of Plenty Magic")
     .text("Waikato Bay Of Plenty Magic");
 
 dropDownBox2.append("option")
-    .attr("value", "WestCoastFever")
+    .attr("value", "West Coast Fever")
     .text("West Coast Fever");
 
 function setCompFields() {
