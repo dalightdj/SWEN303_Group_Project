@@ -6,7 +6,8 @@ d3.select("#floatBox")
     .attr("type", "button")
     .attr("id", "compareButton")
     .attr("onclick", "comparisonsBoxFunc()")
-    .attr("value", "Compare");
+    .attr("value", "Compare Teams")
+    .attr("font-family", "sans-serif");
 
 
 function setCompFields() {
