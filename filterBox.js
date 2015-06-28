@@ -238,7 +238,9 @@ var getTeamData = new Promise(function (resolve, reject) {
 
                 if (row["Home Team"] === element || row["Away Team"] === element) {
 
+
                     var score = row["Score"].toString();
+                    score = score.replace(/\s+/g, '');
                     var T1 = score.slice(score.length - 5, score.length - 3);
                     var T2 = score.slice(score.length - 2, score.length);
 
