@@ -217,7 +217,7 @@ function addInfoboxes() {
                                     }).append("title")
                                     .text(function () {
                                         return "Round " + v[j]["Round"] + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + v[j]["Score"];
-                                    });
+                                    }).attr("font-family", "sans-serif");
 
                                 infoBox.append("text")
                                     .attr("x", rx + (45 / 2))
@@ -226,7 +226,7 @@ function addInfoboxes() {
                                     .text(v[j]["Round"]).append("title")
                                     .text(function () {
                                         return "Round " + v[j]["Round"] + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + v[j]["Score"];
-                                    });
+                                    }).attr("font-family", "sans-serif");
 
                                 rx += 47;
                                 index++;
@@ -310,7 +310,7 @@ function addInfoboxes() {
                             .attr("x", rx + (45 / 2))
                             .attr("y", ry + (45 / 2) + 4)
                             .attr("text-anchor", "middle")
-                            .text("BYE");
+                            .text("BYE").attr("font-family", "sans-serif");
 
                         index++;
 
@@ -344,7 +344,7 @@ function addInfoboxes() {
                         }).append("title")
                         .text(function () {
                             return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
-                        });
+                        }).attr("font-family", "sans-serif");
 
                     infoBox.append("text")
                         .attr("x", rx + (45 / 2))
@@ -353,7 +353,7 @@ function addInfoboxes() {
                         .text(actRound).append("title")
                         .text(function () {
                             return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
-                        });
+                        }).attr("font-family", "sans-serif");
 
                     roundPlusOne += 2;
                 } else {
@@ -379,7 +379,7 @@ function addInfoboxes() {
                         .append("title")
                         .text(function () {
                             return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
-                        });
+                        }).attr("font-family", "sans-serif");
 
                     infoBox.append("text")
                         .attr("x", rx + (45 / 2))
@@ -388,7 +388,7 @@ function addInfoboxes() {
                         .text(v[j]["Round"]).append("title")
                         .text(function () {
                             return "Round " + actRound + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + score;
-                        });
+                        }).attr("font-family", "sans-serif");
 
                     roundPlusOne++;
 
