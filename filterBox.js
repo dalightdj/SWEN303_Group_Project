@@ -1,15 +1,18 @@
-var dropDownBox1 = d3.select("body")
+d3.select("#floatBox").append("p");
+
+
+var dropDownBox1 = d3.select("#floatBox")
     .append("select")
     .attr("id", "ddb1")
     .attr("onChange", "setCompFields()");
 
-var dropDownBox2 = d3.select("body")
+var dropDownBox2 = d3.select("#floatBox")
     .append("select")
     .attr("id", "ddb2")
     .attr("onChange", "setCompFields()");
 
 
-d3.select("body")
+d3.select("#floatBox")
     .append("input")
     .attr("type", "button")
     .attr("id", "compareButton")
