@@ -160,13 +160,97 @@ function addInfoboxes() {
                             continue;
                             break;
                     }
+                } else {
+                    if (v[j] === undefined) {
 
 
+                        var jMinusOne = j - 1;
 
 
+                        if (j != 0 && v[jMinusOne] != undefined) {
+
+                            if (v[jMinusOne]["Round"] === "17") {
+                                continue;
+                            }
+                        }
+
+                        infoBox.append("rect")
+                            .attr("x", rx)
+                            .attr("y", ry)
+                            .attr("width", 45)
+                            .attr("height", 45)
+                            .attr("rx", 5)
+                            .attr("ry", 5)
+                            .style("fill", "Grey");
+
+                        rx += 47;
+                        index++;
+                        roundPlusOne++;
+                        continue;
+                    } else if (v[j]["Round"] === "15") {
+                        var jPlusOne = j + 1;
+
+                        if (v[jPlusOne] != undefined) {
+                            if (v[jPlusOne]["Round"] === "17") {
+
+                                console.log(v[j]);
+
+                                infoBox.append("rect")
+                                    .attr("x", rx)
+                                    .attr("y", ry)
+                                    .attr("width", 45)
+                                    .attr("height", 45)
+                                    .attr("rx", 5)
+                                    .attr("ry", 5)
+                                    .style("fill", function () {
+
+                                        var sc = v[j]["Score"].replace(/\s+/g, '');
+                                        console.log(sc);
+
+                                        if (sc.slice(score.length - 5, score.length - 3) > sc.slice(score.length - 2, score.length)) {
+                                            return "Green";
+                                        } else if (sc.slice(score.length - 5, score.length - 3) === sc.slice(score.length - 2, score.length)) {
+                                            return "Blue";
+                                        } else {
+                                            return "#E60000";
+                                        }
+                                    }).append("title")
+                                    .text(function () {
+                                        return "Round " + v[j]["Round"] + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + v[j]["Score"];
+                                    });
+
+                                infoBox.append("text")
+                                    .attr("x", rx + (45 / 2))
+                                    .attr("y", ry + (45 / 2) + 4)
+                                    .attr("text-anchor", "middle")
+                                    .text(v[j]["Round"]).append("title")
+                                    .text(function () {
+                                        return "Round " + v[j]["Round"] + ": " + v[j]["Home Team"] + " Vs. " + v[j]["Away Team"] + "\nVenue: " + v[j]["Venue"] + "\nScore: " + v[j]["Score"];
+                                    });
+
+                                rx += 47;
+                                index++;
+
+                                infoBox.append("rect")
+                                    .attr("x", rx)
+                                    .attr("y", ry)
+                                    .attr("width", 45)
+                                    .attr("height", 45)
+                                    .attr("rx", 5)
+                                    .attr("ry", 5)
+                                    .style("fill", "Grey");
+
+                                rx += 47;
+                                index++;
+
+                                roundPlusOne += 2;
+
+
+                                continue;
+                            }
+                        }
+                    }
                 }
-
-
 
 
                 if (v[j] === undefined) {
@@ -187,12 +271,10 @@ function addInfoboxes() {
                 }
 
 
-
-
                 actRound = v[j].Round;
 
 
-                var score = v[j]["Score"].toString();
+                var score = v[j]["Score"].toString().replace(/\s+/g, '');
                 var T1 = score.slice(score.length - 5, score.length - 3);
                 var T2 = score.slice(score.length - 2, score.length);
 
@@ -284,6 +366,8 @@ function addInfoboxes() {
                         .attr("rx", 5)
                         .attr("ry", 5)
                         .style("fill", function () {
+
+
                             if ((HomeTeamToScore[0] === k && HomeTeamToScore[1] > AwayTeamToScore[1]) || (AwayTeamToScore[0] === k && AwayTeamToScore[1] > HomeTeamToScore[1])) {
                                 return "Green";
                             } else if (HomeTeamToScore[2] === "draw" || AwayTeamToScore[2] === "draw") {
