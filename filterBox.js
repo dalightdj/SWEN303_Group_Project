@@ -1,17 +1,6 @@
 d3.select("#floatBox").append("p");
 
 
-var dropDownBox1 = d3.select("#floatBox")
-    .append("select")
-    .attr("id", "ddb1")
-    .attr("onChange", "setCompFields()");
-
-var dropDownBox2 = d3.select("#floatBox")
-    .append("select")
-    .attr("id", "ddb2")
-    .attr("onChange", "setCompFields()");
-
-
 d3.select("#floatBox")
     .append("input")
     .attr("type", "button")
@@ -19,86 +8,6 @@ d3.select("#floatBox")
     .attr("onclick", "comparisonsBoxFunc()")
     .attr("value", "Compare");
 
-
-dropDownBox1.append("option")
-    .attr("value", "Adelaide Thunderbirds")
-    .text("AdelaideThunderbirds");
-
-dropDownBox1.append("option")
-    .attr("value", "Canterbury Tactix")
-    .text("Canterbury Tactix");
-
-dropDownBox1.append("option")
-    .attr("value", "Central Pulse")
-    .text("Central Pulse");
-
-dropDownBox1.append("option")
-    .attr("value", "Melbourne Vixens")
-    .text("Melbourne Vixens");
-
-dropDownBox1.append("option")
-    .attr("value", "Northern Mystics")
-    .text("Northern Mystics");
-
-dropDownBox1.append("option")
-    .attr("value", "New South Wales Swifts")
-    .text("NSW Swifts");
-
-dropDownBox1.append("option")
-    .attr("value", "Queensland Firebirds")
-    .text("Queensland Firebirds");
-
-dropDownBox1.append("option")
-    .attr("value", "Southern Steel")
-    .text("Southern Steel");
-
-dropDownBox1.append("option")
-    .attr("value", "Waikato Bay of PlentyMagic")
-    .text("Waikato Bay Of Plenty Magic");
-
-dropDownBox1.append("option")
-    .attr("value", "West Coast Fever")
-    .text("West Coast Fever");
-
-dropDownBox2.append("option")
-    .attr("value", "Adelaide Thunderbirds")
-    .text("AdelaideThunderbirds");
-
-dropDownBox2.append("option")
-    .attr("value", "Canterbury Tactix")
-    .text("Canterbury Tactix");
-
-dropDownBox2.append("option")
-    .attr("value", "Central Pulse")
-    .text("Central Pulse");
-
-dropDownBox2.append("option")
-    .attr("value", "Melbourne Vixens")
-    .text("Melbourne Vixens");
-
-dropDownBox2.append("option")
-    .attr("value", "Northern Mystics")
-    .text("Northern Mystics");
-
-dropDownBox2.append("option")
-    .attr("value", "New South Wales Swifts")
-    .text("NSW Swifts");
-
-dropDownBox2.append("option")
-    .attr("value", "Queensland Firebirds")
-    .text("Queensland Firebirds");
-
-dropDownBox2.append("option")
-    .attr("value", "Southern Steel")
-    .text("Southern Steel");
-
-dropDownBox2.append("option")
-    .attr("value", "Waikato Bay of Plenty Magic")
-    .text("Waikato Bay Of Plenty Magic");
-
-dropDownBox2.append("option")
-    .attr("value", "West Coast Fever")
-    .text("West Coast Fever");
 
 function setCompFields() {
     var ddb1 = document.getElementById("ddb1");
