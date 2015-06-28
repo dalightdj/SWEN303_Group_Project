@@ -81,7 +81,7 @@ dropDownBox2.append("option")
     .text("Northern Mystics");
 
 dropDownBox2.append("option")
-    .attr("value", "NSW Swifts")
+    .attr("value", "New South Wales Swifts")
     .text("NSW Swifts");
 
 dropDownBox2.append("option")
